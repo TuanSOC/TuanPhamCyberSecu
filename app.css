@@ -2681,31 +2681,31 @@ body.nav-open {
   }
 }
 
-/* --- PERFECTED PREMIUM ARCHITECTURE & LOGIC --- */
-.dark body { background-color: #020617 !important; color: #f8fafc !important; }
 
-/* Z-INDEX HIERARCHY:
-   Navbar (topbar): z-index 9999 (ALWAYS on top)
-   Content cards:   z-index auto (normal flow)
-   Ambient bg:      z-index 0-1 (behind everything)
-*/
-.topbar { z-index: 9999 !important; }
-.page-ambient { 
-  z-index: 1 !important; 
-  pointer-events: none !important; 
-}
 
-/* Hero Title: Must NOT be scrambled — preserve gradient span */
-.hero-title { 
-  opacity: 1 !important; 
-  visibility: visible !important; 
-  color: #0f172a !important;
-  display: block !important;
-  font-weight: 800 !important;
-}
-.dark .hero-title {
-  color: #ffffff !important;
-}
+/* ============================================================
+   DARK MODE: NUCLEAR TEXT VISIBILITY
+   This block uses max-specificity selectors to GUARANTEE
+   every piece of text is bright and readable in dark mode.
+   ============================================================ */
+
+/* --- Body & Global --- */
+html.dark body { color: #f1f5f9 !important; }
+html.dark p { color: #e2e8f0 !important; }
+html.dark li { color: #e2e8f0 !important; }
+html.dark span { color: inherit; }
+html.dark h1 { color: #ffffff !important; }
+html.dark h2 { color: #f8fafc !important; }
+html.dark h3 { color: #f8fafc !important; }
+html.dark h4 { color: #f8fafc !important; }
+html.dark strong { color: #22d3ee !important; }
+html.dark a:not(.btn) { color: #38bdf8 !important; }
+
+/* --- Section Titles (Cyan accent) --- */
+html.dark .section-title { color: #22d3ee !important; }
+
+/* --- Hero Section --- */
+html.dark .hero-title { color: #ffffff !important; font-weight: 800 !important; }
 .hero-gradient-text {
   background: linear-gradient(105deg, #22d3ee, #3b82f6, #a855f7) !important;
   -webkit-background-clip: text !important;
@@ -2713,69 +2713,65 @@ body.nav-open {
   -webkit-text-fill-color: transparent !important;
   font-weight: 800 !important;
 }
-.hero-lead { 
-  color: #475569 !important;
-  opacity: 1 !important; 
-}
-.dark .hero-lead {
-  color: #cbd5e1 !important;
-}
+html.dark .hero-lead { color: #cbd5e1 !important; opacity: 1 !important; }
+html.dark .hero-kicker { color: #22d3ee !important; opacity: 1 !important; }
 
-/* Education & Career Cards Contrast */
-.dark .card { 
-  background-color: rgba(15, 23, 42, 0.7) !important;
+/* --- Cards (Projects, About, Experience, etc.) --- */
+html.dark .card { 
+  background-color: rgba(15, 23, 42, 0.75) !important;
   border-color: rgba(255, 255, 255, 0.1) !important;
   backdrop-filter: blur(10px);
 }
-.dark .card h3, .dark .card h4 { color: #22d3ee !important; }
-.dark .card p, .dark .card li { color: #f1f5f9 !important; }
+html.dark .card h3 { color: #22d3ee !important; }
+html.dark .card h4 { color: #22d3ee !important; }
+html.dark .card p { color: #f1f5f9 !important; }
+html.dark .card li { color: #f1f5f9 !important; }
+html.dark .card span { color: #e2e8f0 !important; }
 
-/* FIX: FPT University and sub-text contrast */
-.dark .card .text-muted, 
-.dark .card .text-sm,
-.dark .text-slate-500,
-.dark .text-slate-600,
-.dark .text-slate-400 { 
-  color: #e2e8f0 !important; 
-  opacity: 1 !important;
-}
-
-/* Global dark mode: ALL muted/dim text must be readable */
-.dark .text-muted { color: #cbd5e1 !important; opacity: 1 !important; }
-.dark p, .dark li { color: #e2e8f0 !important; }
-.dark h2, .dark h3, .dark h4 { color: #f8fafc !important; }
-.dark .section-title { color: #22d3ee !important; }
-
-/* About section subtitle ("Focused on SOC/Blue Team...") */
-.dark .section__head p,
-.dark .section__head .text-muted,
-.dark .section__head .text-slate-500,
-.dark .hero-lead { 
+/* --- Chips & Tags --- */
+html.dark .chip,
+html.dark [class*="chip"] { 
   color: #cbd5e1 !important; 
+  border-color: rgba(255, 255, 255, 0.15) !important;
   opacity: 1 !important;
 }
 
+/* --- All Muted/Slate text classes (Tailwind) --- */
+html.dark [class*="text-slate"] { color: #e2e8f0 !important; opacity: 1 !important; }
+html.dark [class*="text-muted"] { color: #cbd5e1 !important; opacity: 1 !important; }
+html.dark [class*="text-gray"] { color: #e2e8f0 !important; opacity: 1 !important; }
+html.dark [class*="opacity-70"] { opacity: 0.9 !important; }
+html.dark [class*="opacity-60"] { opacity: 0.9 !important; }
 
-/* Contact Section: Labels MUST be visible */
-.dark #contact strong { 
-  color: #22d3ee !important; 
-  font-weight: 700 !important;
-}
-.dark #contact li { 
-  color: #f1f5f9 !important; 
-}
-.dark #contact a { 
-  color: #22d3ee !important; 
-}
+/* --- Section Head Subtitles ("Focused on SOC...", "WAF labs..." etc.) --- */
+html.dark .section__head p { color: #94a3b8 !important; opacity: 1 !important; }
 
-/* Meta tiles in hero (Location, Email, Phone, LinkedIn) */
-.dark .meta-tile { background: rgba(6, 10, 26, 0.9) !important; }
-.dark .meta-tile span { color: #ffffff !important; }
-.dark .meta-tile .text-cyan-500 { color: #22d3ee !important; }
+/* --- Meta tiles (Location, Email, Phone, LinkedIn) --- */
+html.dark .meta-tile { background: rgba(6, 10, 26, 0.9) !important; }
+html.dark .meta-tile span { color: #ffffff !important; }
+html.dark .meta-tile [class*="text-cyan"] { color: #22d3ee !important; }
 
-/* Grid & Aura Toning - Reduced Noise */
-.dark .page-ambient__grid { opacity: 0.08 !important; }
-.dark .page-ambient__blob { opacity: 0.35 !important; }
-.dark .page-ambient__nodes { opacity: 0.12 !important; }
+/* --- Contact Section --- */
+html.dark #contact strong { color: #22d3ee !important; }
+html.dark #contact li { color: #f1f5f9 !important; }
+html.dark #contact a { color: #22d3ee !important; }
+
+/* --- Buttons --- */
+html.dark .btn--ghost { color: #e2e8f0 !important; border-color: rgba(255,255,255,0.2) !important; }
+html.dark .link-pill { color: #22d3ee !important; opacity: 1 !important; }
+
+/* --- Background ambient layers --- */
+html.dark .page-ambient__grid { opacity: 0.08 !important; }
+html.dark .page-ambient__blob { opacity: 0.35 !important; }
+html.dark .page-ambient__nodes { opacity: 0.12 !important; }
+
+/* --- Z-INDEX --- */
+.topbar { z-index: 9999 !important; }
+.page-ambient { z-index: 1 !important; pointer-events: none !important; }
+.hero-section .container-app { position: relative; z-index: 10; }
+
+/* --- Reveal animation: ensure visible state is fully opaque --- */
+.reveal.is-visible { opacity: 1 !important; filter: none !important; }
+.hero-title, .hero-lead, .hero-kicker { opacity: 1 !important; visibility: visible !important; }
 
 
