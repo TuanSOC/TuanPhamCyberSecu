@@ -2731,3 +2731,8 @@ body.nav-open {
 .hero-portrait-frame { transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1); }
 .hero-portrait-frame:hover { transform: translateY(-5px) scale(1.02) !important; border-color: rgba(34, 211, 238, 0.4) !important; box-shadow: 0 20px 60px -10px rgba(34, 211, 238, 0.3) !important; }
 .hero-portrait-overlay { z-index: 6; }
+
+/* --- Emergency Visibility Fix --- */
+.hero-title, .hero-lead, .hero-kicker { opacity: 1 !important; visibility: visible !important; display: block !important; }
+.hero-gradient-text { display: inline !important; }
+
