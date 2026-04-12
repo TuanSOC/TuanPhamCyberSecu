@@ -2693,27 +2693,38 @@ body.nav-open {
   pointer-events: none !important; 
 }
 
-/* Visibility Master Fix */
+/* Visibility Master Fix: Adapts to BOTH Light and Dark Mode */
 .hero-title { 
   opacity: 1 !important; 
   visibility: visible !important; 
-  color: #ffffff !important; 
+  color: #0f172a !important; /* Dark slate in Light Mode */
   display: block !important; 
 }
+.dark .hero-title {
+  color: #ffffff !important; /* Pure white in Dark Mode */
+}
 .hero-lead { 
-  color: #cbd5e1 !important; 
+  color: #475569 !important; /* Visible slate in Light Mode */
   opacity: 1 !important; 
+}
+.dark .hero-lead {
+  color: #cbd5e1 !important; /* Visible silver in Dark Mode */
 }
 
 /* Education & Career Cards Contrast */
 .dark .card { 
-  background-color: rgba(15, 23, 42, 0.6) !important;
+  background-color: rgba(15, 23, 42, 0.7) !important;
   border-color: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(10px);
 }
-.dark .card h3, .dark .card h4 { color: #22d3ee !important; } /* Cyan titles */
+.dark .card h3, .dark .card h4 { color: #22d3ee !important; }
 .dark .card p, .dark .card li { color: #f1f5f9 !important; }
-.dark .card .text-muted, .dark .card .text-sm { 
-  color: #ffffff !important; /* Force FPT University and sub-labels to white */
+
+/* FIX: FPT University and sub-text contrast */
+.dark .card .text-muted, 
+.dark .card .text-sm,
+.dark .text-slate-500 { 
+  color: #ffffff !important; 
   opacity: 1 !important;
 }
 
@@ -2721,7 +2732,8 @@ body.nav-open {
 .dark .meta-tile { background: rgba(6, 10, 26, 0.9) !important; }
 .dark .meta-tile span { color: #ffffff !important; }
 
-/* Grid & Aura Toning */
-.dark .page-ambient__grid { opacity: 0.1 !important; }
-.dark .page-ambient__blob { opacity: 0.4 !important; }
+/* Grid & Aura Toning - Reduced Noise */
+.dark .page-ambient__grid { opacity: 0.08 !important; }
+.dark .page-ambient__blob { opacity: 0.35 !important; }
+.dark .page-ambient__nodes { opacity: 0.12 !important; } /* Softened node noise */
 
