@@ -787,7 +787,7 @@ class TextScramble {
 }
 
 function wireScramble() {
-  const titles = document.querySelectorAll(".section-title, .hero-title");
+  const titles = document.querySelectorAll(".section-title");
   titles.forEach((el) => {
     const original = el.innerText;
     const fx = new TextScramble(el);

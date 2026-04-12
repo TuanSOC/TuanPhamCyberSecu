@@ -2694,15 +2694,23 @@ body.nav-open {
   pointer-events: none !important; 
 }
 
-/* Visibility Master Fix: Adapts to BOTH Light and Dark Mode */
+/* Hero Title: Must NOT be scrambled — preserve gradient span */
 .hero-title { 
   opacity: 1 !important; 
   visibility: visible !important; 
   color: #0f172a !important;
-  display: block !important; 
+  display: block !important;
+  font-weight: 800 !important;
 }
 .dark .hero-title {
   color: #ffffff !important;
+}
+.hero-gradient-text {
+  background: linear-gradient(105deg, #22d3ee, #3b82f6, #a855f7) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  font-weight: 800 !important;
 }
 .hero-lead { 
   color: #475569 !important;
@@ -2729,9 +2737,22 @@ body.nav-open {
   opacity: 1 !important;
 }
 
-/* Specific Contact Styling */
+/* Contact Section: Labels MUST be visible */
+.dark #contact strong { 
+  color: #22d3ee !important; 
+  font-weight: 700 !important;
+}
+.dark #contact li { 
+  color: #f1f5f9 !important; 
+}
+.dark #contact a { 
+  color: #22d3ee !important; 
+}
+
+/* Meta tiles in hero (Location, Email, Phone, LinkedIn) */
 .dark .meta-tile { background: rgba(6, 10, 26, 0.9) !important; }
 .dark .meta-tile span { color: #ffffff !important; }
+.dark .meta-tile .text-cyan-500 { color: #22d3ee !important; }
 
 /* Grid & Aura Toning - Reduced Noise */
 .dark .page-ambient__grid { opacity: 0.08 !important; }
