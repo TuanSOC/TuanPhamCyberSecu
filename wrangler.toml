@@ -1,7 +1,6 @@
 name = "tuanphamcyber"
 compatibility_date = "2024-04-01"
-pages_build_output_dir = "./dist"
 
 [assets]
 directory = "./dist"
-binding = "ASSETS"
+# Đã xóa dòng binding = "ASSETS" bị lỗi
