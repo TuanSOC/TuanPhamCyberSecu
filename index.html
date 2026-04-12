@@ -1,0 +1,832 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <script>
+      document.documentElement.classList.add("js");
+      (function () {
+        try {
+          var t = localStorage.getItem("pmt_theme");
+          if (t === "light") return;
+          if (t === "dark") {
+            document.documentElement.classList.add("dark");
+            return;
+          }
+          if (window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches) return;
+          document.documentElement.classList.add("dark");
+        } catch (e) {
+          document.documentElement.classList.add("dark");
+        }
+      })();
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pham Minh Tuan | Cyber Security Portfolio</title>
+    <meta
+      name="description"
+      content="Portfolio of Pham Minh Tuan — SOC/Blue Team (Fresher). SIEM monitoring, alert triage, firewall/WAF, incident response, log analysis."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Pham Minh Tuan | Cyber Security Portfolio" />
+    <meta
+      property="og:description"
+      content="SOC/Blue Team fresher — SIEM, alert triage, firewall/WAF, incident response, log analysis."
+    />
+    <meta property="og:locale" content="en_US" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Pham Minh Tuan | Cyber Security Portfolio" />
+    <meta
+      name="twitter:description"
+      content="SOC/Blue Team fresher — SIEM, alert triage, firewall/WAF, incident response."
+    />
+    <meta name="author" content="Pham Minh Tuan" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f8fafc" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#020617" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Pham Minh Tuan",
+        "jobTitle": "Security Engineer (SOC / Blue Team)",
+        "email": "tinyly90891@gmail.com",
+        "url": "https://www.linkedin.com/in/tuan-pham-8abb3a335/",
+        "sameAs": ["https://www.linkedin.com/in/tuan-pham-8abb3a335/", "https://github.com/TuanSOC"],
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Tan Binh",
+          "addressRegion": "Ho Chi Minh City",
+          "addressCountry": "VN"
+        },
+        "alumniOf": {
+          "@type": "CollegeOrUniversity",
+          "name": "FPT University"
+        },
+        "knowsAbout": [
+          "SIEM",
+          "Incident Response",
+          "Web Application Firewall",
+          "Log Analysis",
+          "Network Security"
+        ]
+      }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="text-base">
+    <div id="page-skeleton" class="flex flex-col gap-4 p-4 sm:p-6" aria-busy="true" aria-label="Loading">
+      <div class="h-14 w-full rounded-2xl skeleton-shimmer"></div>
+      <div class="mx-auto mt-6 flex w-full max-w-6xl flex-1 flex-col gap-6 px-2">
+        <div class="h-9 w-2/3 max-w-md rounded-xl skeleton-shimmer"></div>
+        <div class="h-28 w-full rounded-2xl skeleton-shimmer"></div>
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+          <div class="h-44 rounded-2xl skeleton-shimmer"></div>
+          <div class="h-44 rounded-2xl skeleton-shimmer"></div>
+        </div>
+        <div class="h-32 w-full rounded-2xl skeleton-shimmer"></div>
+      </div>
+    </div>
+
+    <div id="app-root">
+      <div class="page-ambient" aria-hidden="true">
+        <div class="page-ambient__blob page-ambient__blob--a"></div>
+        <div class="page-ambient__blob page-ambient__blob--b"></div>
+        <div class="page-ambient__blob page-ambient__blob--c"></div>
+        <div class="page-ambient__blob page-ambient__blob--d"></div>
+        <div class="page-ambient__flow" aria-hidden="true"></div>
+        <div class="page-ambient__aurora" aria-hidden="true"></div>
+        <div class="page-ambient__grid"></div>
+        <div class="page-ambient__noise"></div>
+        <div class="page-ambient__vignette"></div>
+        <div class="page-ambient__nodes" style="background-image: url('assets/nodes.png');"></div>
+      </div>
+
+      <a
+        class="focus:ring-primary absolute left-4 top-4 z-[300] -translate-y-[200%] rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-900 shadow focus:translate-y-0 focus:outline-none focus:ring-2 dark:border-white/15 dark:bg-slate-900 dark:text-white"
+        href="#main"
+        >Skip to content</a
+      >
+
+      <div class="cursorGlow" aria-hidden="true"></div>
+      <div class="pointer-events-none fixed left-0 right-0 top-0 z-[80] h-[3px] bg-transparent" aria-hidden="true">
+        <div class="scrollProgress__bar h-full w-0"></div>
+      </div>
+
+      <button
+        type="button"
+        class="nav-backdrop"
+        id="navBackdrop"
+        tabindex="-1"
+        aria-label="Close navigation menu"
+        hidden
+      ></button>
+
+      <div id="a11yLive" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+      <div id="appToast" class="app-toast" role="status" aria-live="polite" aria-atomic="true"></div>
+
+      <header class="topbar">
+        <div class="container-app flex flex-wrap items-center justify-between gap-4 py-3 md:py-4">
+          <div class="flex min-w-0 items-center gap-3">
+            <div
+              class="brand-mark h-10 w-10 shrink-0 overflow-hidden rounded-full border-2 border-primary/20 bg-slate-100 shadow-md transition-transform duration-300 ease-in-out hover:scale-110 dark:border-white/20 dark:bg-slate-800"
+              aria-hidden="true"
+            >
+              <img src="assets/portrait.png" alt="Avatar" class="h-full w-full object-cover">
+            </div>
+            <div class="min-w-0">
+              <div class="brand-display truncate text-base font-bold tracking-tight text-slate-900 dark:text-white">Pham Minh Tuan</div>
+              <div class="truncate text-xs text-slate-500 dark:text-slate-400">Security Engineer Fresher • SOC/Blue Team</div>
+            </div>
+          </div>
+
+          <nav class="nav nav--desktop hidden flex-wrap items-center gap-1 md:flex" aria-label="Main navigation">
+            <a class="nav-link" href="#about"><i data-lucide="user" class="mr-1 inline size-3.5 opacity-70"></i>About</a>
+            <a class="nav-link" href="#skills"><i data-lucide="cpu" class="mr-1 inline size-3.5 opacity-70"></i>Skills</a>
+            <a class="nav-link" href="#experience"><i data-lucide="briefcase" class="mr-1 inline size-3.5 opacity-70"></i>Experience</a>
+            <a class="nav-link" href="#projects"><i data-lucide="folder-git-2" class="mr-1 inline size-3.5 opacity-70"></i>Projects</a>
+            <a class="nav-link" href="#certs"><i data-lucide="award" class="mr-1 inline size-3.5 opacity-70"></i>Certifications</a>
+            <a class="nav-link" href="#contact"><i data-lucide="mail" class="mr-1 inline size-3.5 opacity-70"></i>Contact</a>
+          </nav>
+
+          <div class="flex items-center gap-2">
+            <button
+              class="navToggle flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-xl border border-slate-200/90 bg-white/80 md:hidden dark:border-white/12 dark:bg-white/5"
+              id="navToggle"
+              type="button"
+              aria-label="Open navigation menu"
+              aria-expanded="false"
+            >
+              <span></span><span></span>
+            </button>
+            <button
+              class="btn btn--ghost h-10 w-10 rounded-xl border-0 px-0"
+              id="themeToggle"
+              type="button"
+              aria-label="Toggle theme"
+            >
+              <i data-lucide="sun" class="hidden size-[18px] dark:block"></i>
+              <i data-lucide="moon" class="block size-[18px] dark:hidden"></i>
+            </button>
+            <a class="btn btn--primary hidden sm:inline-flex" href="./assets/Pham-Minh-Tuan.pdf" download>
+              <i data-lucide="download" class="size-4"></i>
+              Download CV
+            </a>
+          </div>
+        </div>
+
+        <nav
+          class="nav nav--mobile border-t border-slate-200/80 px-4 dark:border-white/10 md:hidden"
+          id="navMobile"
+          aria-label="Main navigation (mobile)"
+        >
+          <div class="container-app flex flex-col gap-1 py-3">
+            <a class="nav-link" href="#about">About</a>
+            <a class="nav-link" href="#skills">Skills</a>
+            <a class="nav-link" href="#experience">Experience</a>
+            <a class="nav-link" href="#projects">Projects</a>
+            <a class="nav-link" href="#certs">Certifications</a>
+            <a class="nav-link" href="#contact">Contact</a>
+            <a class="btn btn--primary mt-2 justify-center sm:hidden" href="./assets/Pham-Minh-Tuan.pdf" download>Download CV</a>
+          </div>
+        </nav>
+      </header>
+
+      <main id="main">
+        <section class="hero-section relative overflow-hidden pt-10 pb-16 md:pt-16 md:pb-28">
+          <div class="hero-mouse-glow" aria-hidden="true"></div>
+          <div class="orb-pulse pointer-events-none absolute -right-24 top-0 h-72 w-72" aria-hidden="true">
+            <div
+              class="h-full w-full rounded-full bg-gradient-to-br from-primary/25 to-accent/20 blur-3xl will-change-transform dark:from-primary/30 dark:to-accent/15"
+              data-parallax="0.12"
+            ></div>
+          </div>
+          <div class="pointer-events-none absolute -left-20 bottom-0 h-64 w-64" aria-hidden="true">
+            <div
+              class="h-full w-full rounded-full bg-gradient-to-tr from-indigo-500/15 to-transparent blur-3xl will-change-transform"
+              data-parallax="-0.08"
+            ></div>
+          </div>
+
+          <div class="container-app relative grid gap-10 lg:grid-cols-[1fr_minmax(0,420px)] lg:items-start lg:gap-12">
+            <div class="hero__copy">
+              <p
+                class="hero-kicker mb-4 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3 py-1.5 text-xs font-semibold text-primary dark:border-accent/25 dark:bg-accent/10 dark:text-accent"
+              >
+                <i data-lucide="activity" class="size-3.5"></i>
+                SOC Tier 1 Candidate
+              </p>
+              <h1 class="hero-title text-[2.35rem] font-extrabold leading-[1.08] tracking-tight text-slate-900 sm:text-5xl md:text-6xl lg:text-[3.65rem] dark:text-white">
+                Blue Team mindset,
+                <span class="hero-gradient-text glitch-text" data-text="log-driven">log-driven</span> detection.
+              </h1>
+              <p class="hero-lead mt-5 max-w-xl text-lg leading-relaxed text-slate-600 dark:text-slate-400">
+                Hands-on experience with SIEM (ELK/Graylog/Wazuh), alert triage, firewall/WAF configuration, and system monitoring.
+                Objective: join a SOC team to contribute to threat detection and incident handling.
+              </p>
+              <div class="mt-8 flex flex-wrap gap-3">
+                <a class="btn btn--primary" href="#projects">
+                  View projects
+                  <i data-lucide="arrow-right" class="size-4"></i>
+                </a>
+                <a class="btn btn--ghost" href="#contact">
+                  <i data-lucide="mail" class="size-4"></i>
+                  Contact
+                </a>
+              </div>
+              <ul class="meta mt-10 grid gap-3 sm:grid-cols-2">
+                <li class="meta-tile flex items-start gap-3 rounded-2xl border border-slate-200/80 bg-white/60 p-3 dark:border-white/10 dark:bg-white/[0.04]">
+                  <span class="text-muted flex shrink-0 items-center gap-2 text-xs font-semibold uppercase tracking-wide">
+                    <i data-lucide="map-pin" class="size-4 text-primary dark:text-accent"></i>
+                    Location
+                  </span>
+                  <span class="text-sm font-medium text-slate-800 dark:text-slate-200">Tan Binh, Ho Chi Minh City</span>
+                </li>
+                <li class="meta-tile flex items-start gap-3 rounded-2xl border border-slate-200/80 bg-white/60 p-3 dark:border-white/10 dark:bg-white/[0.04]">
+                  <span class="text-muted flex shrink-0 items-center gap-2 text-xs font-semibold uppercase tracking-wide">
+                    <i data-lucide="mail" class="size-4 text-primary dark:text-accent"></i>
+                    Email
+                  </span>
+                  <span class="flex flex-wrap items-center gap-2">
+                    <a class="text-sm font-medium text-primary hover:underline dark:text-accent" href="mailto:tinyly90891@gmail.com"
+                      >tinyly90891@gmail.com</a
+                    >
+                    <button
+                      type="button"
+                      class="copy-chip"
+                      data-copy="tinyly90891@gmail.com"
+                      aria-label="Copy email address"
+                    >
+                      <i data-lucide="copy" class="size-3.5"></i>
+                      Copy
+                    </button>
+                  </span>
+                </li>
+                <li class="meta-tile flex items-start gap-3 rounded-2xl border border-slate-200/80 bg-white/60 p-3 dark:border-white/10 dark:bg-white/[0.04]">
+                  <span class="text-muted flex shrink-0 items-center gap-2 text-xs font-semibold uppercase tracking-wide">
+                    <i data-lucide="phone" class="size-4 text-primary dark:text-accent"></i>
+                    Phone
+                  </span>
+                  <a class="text-sm font-medium text-primary hover:underline dark:text-accent" href="tel:+84981052217">0981 052 217</a>
+                </li>
+                <li class="meta-tile flex items-start gap-3 rounded-2xl border border-slate-200/80 bg-white/60 p-3 dark:border-white/10 dark:bg-white/[0.04]">
+                  <span class="text-muted flex shrink-0 items-center gap-2 text-xs font-semibold uppercase tracking-wide">
+                    <i data-lucide="globe" class="size-4 text-primary dark:text-accent"></i>
+                    LinkedIn
+                  </span>
+                  <a
+                    class="truncate text-sm font-medium text-primary hover:underline dark:text-accent"
+                    href="https://www.linkedin.com/in/tuan-pham-8abb3a335/"
+                    target="_blank"
+                    rel="noreferrer"
+                    >tuan-pham-8abb3a335</a
+                  >
+                </li>
+              </ul>
+            </div>
+
+            <div class="hero__panel hero-panel-wrap relative">
+              <!-- New Portrait Section -->
+              <div class="hero-portrait-container mb-8 lg:mb-12">
+                <div class="hero-portrait-frame">
+                  <div class="hero-portrait-glow"></div>
+                  <img src="assets/portrait.png" alt="Pham Minh Tuan" class="hero-portrait-img">
+                  <div class="hero-portrait-overlay"></div>
+                  <div class="hero-portrait-scanner"></div>
+                </div>
+              </div>
+              <div class="hero-float hero-panel relative z-[1] rounded-2xl border border-slate-200/80 bg-white/80 shadow-xl shadow-slate-200/40 backdrop-blur-xl dark:border-white/12 dark:bg-slate-900/50 dark:shadow-black/40">
+                <div class="flex items-center justify-between border-b border-slate-200/80 px-4 py-3 dark:border-white/10">
+                  <div class="dots flex gap-2" aria-hidden="true">
+                    <span class="h-2.5 w-2.5 rounded-full bg-red-400/90"></span>
+                    <span class="h-2.5 w-2.5 rounded-full bg-amber-400/90"></span>
+                    <span class="h-2.5 w-2.5 rounded-full bg-emerald-400/90"></span>
+                  </div>
+                  <div class="font-mono text-xs font-medium text-slate-500 dark:text-slate-400">live /triage</div>
+                  <span
+                    class="rounded-full border border-accent/30 bg-accent/15 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-accent"
+                    >blue</span
+                  >
+                </div>
+                <div class="p-4 relative">
+                  <div class="terminal-scanline"></div>
+                  <pre
+                    class="terminal terminal--glow max-h-[min(52vh,380px)] overflow-auto rounded-xl border border-slate-200/60 bg-slate-950 p-4 text-xs leading-relaxed text-slate-100 dark:border-white/10"
+                    aria-label="Simulated terminal"
+                    ><code id="term" class="font-mono">$ whoami
+SOC/Blue Team • Fresher
+
+$ stack --list
+- ELK / Graylog / Kibana
+- Wazuh • pfSense • Barracuda WAF
+- Wireshark • Nmap • Burp Suite
+
+$ status
+[ok] alert triage
+[ok] log analysis
+[ok] hardening mindset
+</code></pre>
+                  <div class="mt-3 flex flex-wrap gap-2">
+                    <span class="chip-hero">SIEM</span>
+                    <span class="chip-hero">IR</span>
+                    <span class="chip-hero">WAF</span>
+                    <span class="chip-hero">Firewall</span>
+                  </div>
+                </div>
+              </div>
+              <div class="signal z-[2]" aria-hidden="true">
+                <div class="signal__bar"></div>
+                <div class="signal__bar"></div>
+                <div class="signal__bar"></div>
+                <div class="signal__bar"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="about" class="section scroll-mt-24 py-16 md:py-20">
+          <div class="container-app">
+            <div class="section-rule" aria-hidden="true"></div>
+            <div class="section__head mb-8 flex flex-wrap items-end justify-between gap-4">
+              <h2 class="section-title text-3xl font-bold tracking-tight text-slate-900 dark:text-white">About</h2>
+              <p class="max-w-xl text-slate-600 dark:text-slate-400">
+                Focused on SOC/Blue Team with a hands-on workflow: log → triage → investigation → action.
+              </p>
+            </div>
+            <div class="grid gap-6 md:grid-cols-2">
+              <div class="card">
+                <h3 class="mb-3 text-lg font-semibold text-slate-900 dark:text-white">Career Objective</h3>
+                <p class="text-muted leading-relaxed">
+                  SOC/Blue Team candidate with hands-on experience in SIEM monitoring, alert triage/categorization, and firewall configuration.
+                  Strong foundation in incident response and log analysis; seeking a SOC Tier 1 role to support threat detection and incident handling.
+                </p>
+              </div>
+              <div class="card">
+                <h3 class="mb-3 text-lg font-semibold text-slate-900 dark:text-white">Education</h3>
+                <p class="text-muted mb-3">
+                  <strong class="text-slate-800 dark:text-slate-200">FPT University</strong> — Information Assurance (2021–2025)
+                </p>
+                <ul class="list">
+                  <li>Network Security, System Hardening</li>
+                  <li>Operating System Security, Web Security</li>
+                  <li>Digital Forensics, Database Security</li>
+                  <li>Vulnerability Assessment</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="skills" class="section scroll-mt-24 py-16 md:py-20">
+          <div class="container-app">
+            <div class="section-rule" aria-hidden="true"></div>
+            <div class="section__head mb-8 flex flex-wrap items-end justify-between gap-4">
+              <h2 class="section-title text-3xl font-bold tracking-tight text-slate-900 dark:text-white">Skills</h2>
+              <p class="max-w-xl text-slate-600 dark:text-slate-400">
+                Blue Team focused: SIEM, log investigation, network security, and lightweight automation with Python.
+              </p>
+            </div>
+            <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              <div class="card">
+                <h3 class="mb-3 text-lg font-semibold text-slate-900 dark:text-white">SIEM & Log</h3>
+                <div class="flex flex-wrap gap-2">
+                  <span class="tag">ELK Stack</span>
+                  <span class="tag">Graylog</span>
+                  <span class="tag">Kibana</span>
+                  <span class="tag">Wazuh</span>
+                  <span class="tag">Acronis</span>
+                  <span class="tag">Regex</span>
+                  <span class="tag">Log Analysis</span>
+                  <span class="tag">Security Monitoring</span>
+                </div>
+              </div>
+              <div class="card">
+                <h3 class="mb-3 text-lg font-semibold text-slate-900 dark:text-white">Network & Security</h3>
+                <div class="flex flex-wrap gap-2">
+                  <span class="tag">pfSense</span>
+                  <span class="tag">Barracuda</span>
+                  <span class="tag">Web Application Firewall (Barracuda)</span>
+                  <span class="tag">WAF config</span>
+                  <span class="tag">Port forwarding</span>
+                  <span class="tag">Protocols</span>
+                  <span class="tag">OWASP Top 10</span>
+                  <span class="tag">Vulnerability Assessment</span>
+                </div>
+              </div>
+              <div class="card">
+                <h3 class="mb-3 text-lg font-semibold text-slate-900 dark:text-white">Tools</h3>
+                <div class="flex flex-wrap gap-2">
+                  <span class="tag">Wireshark</span>
+                  <span class="tag">Nmap</span>
+                  <span class="tag">Burp Suite</span>
+                  <span class="tag">Metasploit (basic)</span>
+                  <span class="tag">CisCat</span>
+                  <span class="tag">Lynis</span>
+                  <span class="tag">Linux (Kali/Ubuntu)</span>
+                  <span class="tag">Digital Forensics</span>
+                </div>
+              </div>
+              <div class="card">
+                <h3 class="mb-3 text-lg font-semibold text-slate-900 dark:text-white">Automation</h3>
+                <div class="flex flex-wrap gap-2">
+                  <span class="tag">Python scripting</span>
+                  <span class="tag">SMTP/API automation</span>
+                  <span class="tag">Log parsing</span>
+                  <span class="tag">Alerting</span>
+                </div>
+              </div>
+              <div class="card">
+                <h3 class="mb-3 text-lg font-semibold text-slate-900 dark:text-white">System & Platform</h3>
+                <div class="flex flex-wrap gap-2">
+                  <span class="tag">Docker</span>
+                  <span class="tag">Traefik (TLS/DNS)</span>
+                  <span class="tag">Proxmox</span>
+                  <span class="tag">Grafana</span>
+                  <span class="tag">Loki</span>
+                  <span class="tag">Zabbix</span>
+                  <span class="tag">Alloy</span>
+                </div>
+              </div>
+              <div class="card">
+                <h3 class="mb-3 text-lg font-semibold text-slate-900 dark:text-white">Soft Skills</h3>
+                <div class="flex flex-wrap gap-2">
+                  <span class="tag">Incident analysis</span>
+                  <span class="tag">Problem solving</span>
+                  <span class="tag">Research & documentation</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="experience" class="section scroll-mt-24 py-16 md:py-20">
+          <div class="container-app">
+            <div class="section-rule" aria-hidden="true"></div>
+            <div class="section__head mb-8 flex flex-wrap items-end justify-between gap-4">
+              <h2 class="section-title text-3xl font-bold tracking-tight text-slate-900 dark:text-white">Experience</h2>
+              <p class="max-w-xl text-slate-600 dark:text-slate-400">
+                Internships in SOC operations, security research, and system administration with a secure-by-default mindset.
+              </p>
+            </div>
+            <div class="timeline grid gap-4">
+              <article class="timeline__item card">
+                <div class="timeline__when">Sep 2024 – Dec 2024</div>
+                <h3 class="mb-3 text-lg font-semibold text-slate-900 dark:text-white">South Wave Solution (SWS) — Intern (SOC & Security Research)</h3>
+                <ul class="list">
+                  <li>Monitor security logs and network activity using SIEM tools: ELK, Graylog, Kibana</li>
+                  <li>Work with Linux systems; configure Barracuda & pfSense firewalls</li>
+                  <li>Triage security alerts, perform initial analysis, and categorize alerts to identify potential threats</li>
+                  <li>Research vulnerability scanning tools: Lynis, CIS-CAT</li>
+                  <li>Deploy and configure a Zimbra mail server for testing and security evaluation</li>
+                </ul>
+              </article>
+              <article class="timeline__item card">
+                <div class="timeline__when">Feb 2026 – Present</div>
+                <h3 class="mb-3 text-lg font-semibold text-slate-900 dark:text-white">Cosigma — Intern (System Administrator)</h3>
+                <ul class="list">
+                  <li>Implement reverse proxy and secure routing with Traefik (TLS, DNS)</li>
+                  <li>Deploy and manage containerized services using Docker in production-like environments</li>
+                  <li>Authentication & access control using PAM (Teleport)</li>
+                  <li>Secure tunneling & reverse proxy with Pangolin</li>
+                  <li>Use Proxmox to build and manage virtualized infrastructure (VM provisioning & management)</li>
+                  <li>Build dashboards and alert rules with Grafana; integrate Alloy, Zabbix, and Loki for metrics/log collection</li>
+                  <li>Troubleshoot and optimize log/metric data pipelines for monitoring</li>
+                </ul>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section id="projects" class="section scroll-mt-24 py-16 md:py-20">
+          <div class="container-app">
+            <div class="section-rule" aria-hidden="true"></div>
+            <div class="section__head mb-8 flex flex-wrap items-end justify-between gap-4">
+              <h2 class="section-title text-3xl font-bold tracking-tight text-slate-900 dark:text-white">Featured Projects</h2>
+              <p class="max-w-xl text-slate-600 dark:text-slate-400">
+                Hands-on projects: WAF labs, unsupervised threat detection, and database security hardening.
+              </p>
+            </div>
+            <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              <article class="card project">
+                <div class="project__top mb-3 flex flex-wrap items-start justify-between gap-3">
+                  <h3 class="text-lg font-semibold text-slate-900 dark:text-white">Barracuda WAF Security Lab</h3>
+                  <div class="text-muted text-sm">Feb 2025 – Apr 2025 • Individual Researcher</div>
+                </div>
+                <p class="text-muted mb-4 leading-relaxed">
+                  Deployed DVWA behind a Barracuda Web Application Firewall and tuned WAF rules to detect and block simulated attacks.
+                </p>
+                <div class="mb-4 flex flex-wrap gap-2">
+                  <span class="tag">Barracuda WAF</span>
+                  <span class="tag">DVWA</span>
+                  <span class="tag">DDoS</span>
+                  <span class="tag">XSS</span>
+                  <span class="tag">SMTP</span>
+                  <span class="tag">On-Prem</span>
+                </div>
+                <button
+                  class="project__toggle btn btn--ghost w-full justify-between sm:w-auto [&[aria-expanded=true]_svg]:rotate-180"
+                  type="button"
+                  aria-expanded="false"
+                  aria-controls="proj-barracuda-details"
+                >
+                  View details
+                  <i data-lucide="chevron-down" class="size-4 transition-transform duration-300 ease-in-out"></i>
+                </button>
+                <div class="project__details" id="proj-barracuda-details">
+                  <ul class="list mt-3">
+                    <li>Deployed DVWA (Damn Vulnerable Web App) behind Barracuda Web Application Firewall</li>
+                    <li>Simulated real-world attacks: DDoS, XSS, file upload bypass, and more</li>
+                    <li>Configured WAF rules to detect and block attacks</li>
+                    <li>Integrated an alert system to send real-time notifications via email using Python SMTP (port 587, 465)</li>
+                    <li>Developed automated Python scripts to send alerts via API and monitor suspicious activities</li>
+                    <li>Understood on-premise WAF setup, alert forwarding, and security policy tuning</li>
+                  </ul>
+                </div>
+              </article>
+
+              <article class="card project">
+                <div class="project__top mb-3 flex flex-wrap items-start justify-between gap-3">
+                  <h3 class="text-lg font-semibold text-slate-900 dark:text-white">AI-based Unsupervised Threat Detection</h3>
+                  <div class="text-muted text-sm">Jul 2025 – Sep 2025 • Research Developer (Capstone)</div>
+                </div>
+                <p class="text-muted mb-4 leading-relaxed">
+                  Detect Brute Force and SQL Injection (SQLi) using unsupervised ML, enriched by Wazuh and pfSense telemetry.
+                </p>
+                <div class="mb-4 flex flex-wrap gap-2">
+                  <span class="tag">Python</span>
+                  <span class="tag">Scikit-learn</span>
+                  <span class="tag">Isolation Forest</span>
+                  <span class="tag">Autoencoder</span>
+                  <span class="tag">Wazuh (SIEM)</span>
+                  <span class="tag">pfSense</span>
+                  <span class="tag">Flask</span>
+                </div>
+                <button
+                  class="project__toggle btn btn--ghost w-full justify-between sm:w-auto [&[aria-expanded=true]_svg]:rotate-180"
+                  type="button"
+                  aria-expanded="false"
+                  aria-controls="proj-ai-details"
+                >
+                  View details
+                  <i data-lucide="chevron-down" class="size-4 transition-transform duration-300 ease-in-out"></i>
+                </button>
+                <div class="project__details" id="proj-ai-details">
+                  <ul class="list mt-3">
+                    <li>Designed and implemented a capstone project for detecting Brute-Force and SQL Injection (SQLi) attacks using unsupervised machine learning</li>
+                    <li>Targeted real-world network and web attack scenarios</li>
+                    <li>Integrated Wazuh as a centralized security management and log aggregation (SIEM) platform to collect, normalize, and correlate events</li>
+                    <li>Utilized an Intrusion Prevention System (IPS) and firewall to capture network traffic, authentication attempts, and attack indicators</li>
+                    <li>Extracted and engineered features from Wazuh alerts, authentication logs, HTTP request logs, and network traffic for model training</li>
+                    <li>Applied Isolation Forest and Autoencoder models to identify anomalous behavior patterns without labeled attack data</li>
+                    <li>Built data preprocessing pipelines for log parsing, cleaning, normalization, and feature encoding</li>
+                    <li>Evaluated detection performance using ROC-AUC, Precision–Recall, false positive rate, and anomaly score analysis</li>
+                    <li>Developed a lightweight Flask-based API/dashboard to visualize detected anomalies and security alerts</li>
+                    <li>Demonstrated the effectiveness of AI-driven unsupervised detection in reducing reliance on rule-based signatures</li>
+                  </ul>
+                </div>
+                <div class="project__links mt-4">
+                  <a class="link-pill" href="https://github.com/TuanSOC/ProJect-AI-Unsupervised" target="_blank" rel="noreferrer">
+                    <i data-lucide="code" class="size-4"></i>
+                    Source code
+                  </a>
+                </div>
+              </article>
+
+              <article class="card project md:col-span-2 lg:col-span-1">
+                <div class="project__top mb-3 flex flex-wrap items-start justify-between gap-3">
+                  <h3 class="text-lg font-semibold text-slate-900 dark:text-white">Oracle SQL Database Security</h3>
+                  <div class="text-muted text-sm">Security Lab • On-Prem</div>
+                </div>
+                <p class="text-muted mb-4 leading-relaxed">
+                  Hardened Oracle SQL access controls and auditing to reduce risk from SQL injection and unauthorized queries.
+                </p>
+                <div class="mb-4 flex flex-wrap gap-2">
+                  <span class="tag">Oracle SQL</span>
+                  <span class="tag">SQL Injection</span>
+                  <span class="tag">Least Privilege</span>
+                  <span class="tag">Auditing</span>
+                  <span class="tag">Hardening</span>
+                </div>
+                <button
+                  class="project__toggle btn btn--ghost w-full justify-between sm:w-auto [&[aria-expanded=true]_svg]:rotate-180"
+                  type="button"
+                  aria-expanded="false"
+                  aria-controls="proj-oracle-details"
+                >
+                  View details
+                  <i data-lucide="chevron-down" class="size-4 transition-transform duration-300 ease-in-out"></i>
+                </button>
+                <div class="project__details" id="proj-oracle-details">
+                  <ul class="list mt-3">
+                    <li>Implemented database-level security controls on Oracle SQL</li>
+                    <li>Configured user access management, roles, and privileges to enforce least-privilege principle</li>
+                    <li>Enabled auditing of user activities and DML/DQL events</li>
+                    <li>Tested for SQL injection vulnerabilities and applied best practices for hardening</li>
+                    <li>Simulated unauthorized access attempts and monitored logs for anomalies</li>
+                    <li>Compared with MySQL to understand cross-platform security configurations</li>
+                  </ul>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section id="certs" class="section scroll-mt-24 py-16 md:py-20">
+          <div class="container-app">
+            <div class="section-rule" aria-hidden="true"></div>
+            <div class="section__head mb-8 flex flex-wrap items-end justify-between gap-4">
+              <h2 class="section-title text-3xl font-bold tracking-tight text-slate-900 dark:text-white">Certifications</h2>
+              <p class="max-w-xl text-slate-600 dark:text-slate-400">
+                Networking foundations and SOC operations training from Cisco Networking Academy.
+              </p>
+            </div>
+            <div class="grid-certs grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              <div class="card cert">
+                <i data-lucide="badge-check" class="mb-3 size-8 text-primary dark:text-accent"></i>
+                <h3 class="mb-2 text-lg font-semibold text-slate-900 dark:text-white">CCNA: Switching, Routing, and Wireless Essentials</h3>
+                <div class="text-muted text-sm mb-4">Cisco Networking Academy • 2023</div>
+                <a href="https://www.credly.com/badges/8cb76dcc-7549-4039-a191-1c54d51c2650/public_url" target="_blank" rel="noreferrer" class="link-pill text-xs py-1 px-3">
+                  <i data-lucide="external-link" class="size-3"></i>
+                  Verify
+                </a>
+              </div>
+<div class="card cert">
+                <div class="flex items-start justify-between">
+                  <i data-lucide="badge-check" class="mb-3 size-8 text-primary dark:text-accent"></i>
+                  <img src="assets/badge-cisco.png" alt="Cisco Badge" class="size-12 object-contain opacity-80">
+                </div>
+                <h3 class="mb-2 text-lg font-semibold text-slate-900 dark:text-white">CyberOps Associate</h3>
+                <div class="text-muted text-sm mb-4">Cisco Networking Academy • 2023</div>
+                <a href="https://www.credly.com/badges/45f0441c-1f0c-493d-a2dd-cc9a95777c8b/public_url" target="_blank" rel="noreferrer" class="link-pill text-xs py-1 px-3">
+                  <i data-lucide="external-link" class="size-3"></i>
+                  Verify
+                </a>
+              </div>
+              <div class="card cert">
+                <i data-lucide="badge-check" class="mb-3 size-8 text-primary dark:text-accent"></i>
+                <h3 class="mb-2 text-lg font-semibold text-slate-900 dark:text-white">Ethical Hacker</h3>
+                <div class="text-muted text-sm mb-4">Cisco Networking Academy • 2025</div>
+                <a href="https://www.credly.com/badges/45f0441c-1f0c-493d-a2dd-cc9a95777c8b/public_url" target="_blank" rel="noreferrer" class="link-pill text-xs py-1 px-3">
+                  <i data-lucide="external-link" class="size-3"></i>
+                  Verify
+                </a>
+              </div>
+<div class="card cert">
+                <div class="flex items-start justify-between">
+                  <i data-lucide="badge-check" class="mb-3 size-8 text-primary dark:text-accent"></i>
+                  <img src="assets/badge-isc2.png" alt="ISC2 Badge" class="size-12 object-contain opacity-80">
+                </div>
+                <h3 class="mb-2 text-lg font-semibold text-slate-900 dark:text-white">ISC2 Systems Security Certified Practitioner (SSCP) Specialization</h3>
+                <div class="text-muted text-sm font-mono text-[10px] mb-1">ID: A569L1FT9TZH</div>
+                <div class="text-muted text-sm mb-4">ISC2 • Mar 2025</div>
+                <a href="https://www.coursera.org/account/accomplishments/specialization/A569L1FT9TZH" target="_blank" rel="noreferrer" class="link-pill text-xs py-1 px-3">
+                  <i data-lucide="external-link" class="size-3"></i>
+                  Verify
+                </a>
+              </div>
+              <div class="card cert">
+                <i data-lucide="badge-check" class="mb-3 size-8 text-primary dark:text-accent"></i>
+                <h3 class="mb-2 text-lg font-semibold text-slate-900 dark:text-white">Applied Cryptography Specialization</h3>
+                <div class="text-muted text-sm font-mono text-[10px] mb-1">ID: RT4PZTRQAUC3</div>
+                <div class="text-muted text-sm mb-4">University of Colorado System • May 2024</div>
+                <a href="https://www.coursera.org/account/accomplishments/specialization/RT4PZTRQAUC3" target="_blank" rel="noreferrer" class="link-pill text-xs py-1 px-3">
+                  <i data-lucide="external-link" class="size-3"></i>
+                  Verify
+                </a>
+              </div>
+              <div class="card cert">
+                <i data-lucide="badge-check" class="mb-3 size-8 text-primary dark:text-accent"></i>
+                <h3 class="mb-2 text-lg font-semibold text-slate-900 dark:text-white">Core Java Specialization</h3>
+                <div class="text-muted text-sm font-mono text-[10px] mb-1">ID: 89A5SN83TDYA</div>
+                <div class="text-muted text-sm mb-4">LearnQuest • Oct 2025</div>
+                <a href="https://www.coursera.org/account/accomplishments/specialization/89A5SN83TDYA" target="_blank" rel="noreferrer" class="link-pill text-xs py-1 px-3">
+                  <i data-lucide="external-link" class="size-3"></i>
+                  Verify
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="contact" class="section section--contact scroll-mt-24 py-16 md:py-20">
+          <div class="container-app">
+            <div class="section-rule" aria-hidden="true"></div>
+            <div class="section__head mb-8 flex flex-wrap items-end justify-between gap-4">
+              <h2 class="section-title text-3xl font-bold tracking-tight text-slate-900 dark:text-white">Contact</h2>
+              <p class="max-w-xl text-slate-600 dark:text-slate-400">
+                If you need a SOC Tier 1 / Blue Team fresher, I reply quickly via email.
+              </p>
+            </div>
+            <div class="grid gap-6 md:grid-cols-2">
+              <div class="card">
+                <h3 class="mb-4 text-lg font-semibold text-slate-900 dark:text-white">Details</h3>
+                <ul class="list">
+                  <li class="flex flex-wrap items-baseline gap-x-2 gap-y-1">
+                    <strong class="text-slate-800 dark:text-slate-200">Email:</strong>
+                    <a class="text-primary hover:underline dark:text-accent" href="mailto:tinyly90891@gmail.com">tinyly90891@gmail.com</a>
+                    <button
+                      type="button"
+                      class="copy-chip"
+                      data-copy="tinyly90891@gmail.com"
+                      aria-label="Copy email address"
+                    >
+                      <i data-lucide="copy" class="size-3.5"></i>
+                      Copy
+                    </button>
+                  </li>
+                  <li>
+                    <strong class="text-slate-800 dark:text-slate-200">Phone:</strong>
+                    <a class="text-primary hover:underline dark:text-accent" href="tel:+84981052217">0981 052 217</a>
+                  </li>
+                  <li><strong class="text-slate-800 dark:text-slate-200">Location:</strong> Tan Binh, Ho Chi Minh City</li>
+                  <li>
+                    <strong class="text-slate-800 dark:text-slate-200">LinkedIn:</strong>
+                    <a class="text-primary hover:underline dark:text-accent" href="https://www.linkedin.com/in/tuan-pham-8abb3a335/" target="_blank" rel="noreferrer">tuan-pham-8abb3a335</a>
+                  </li>
+                </ul>
+                <div class="contact__actions mt-6 flex flex-wrap gap-3">
+                  <a class="btn btn--primary" href="mailto:tinyly90891@gmail.com?subject=SOC%20Role%20-%20Portfolio%20Contact">
+                    <i data-lucide="send" class="size-4"></i>
+                    Send email
+                  </a>
+                  <a class="btn btn--ghost" href="./assets/Pham-Minh-Tuan.pdf" download>
+                    <i data-lucide="download" class="size-4"></i>
+                    Download CV
+                  </a>
+                </div>
+              </div>
+              <form class="card form relative grid gap-2" id="contactForm" aria-label="Contact form (opens email draft)">
+                <h3 class="mb-2 text-lg font-semibold text-slate-900 dark:text-white">Send a message (opens email draft)</h3>
+                <input
+                  type="text"
+                  name="website"
+                  tabindex="-1"
+                  autocomplete="off"
+                  class="form-honeypot"
+                  aria-hidden="true"
+                />
+                <label class="grid gap-2">
+                  <span class="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">Subject</span>
+                  <input
+                    name="subject"
+                    type="text"
+                    placeholder="e.g., SOC Tier 1 application"
+                    required
+                    class="w-full rounded-xl border border-slate-200/90 bg-white/80 px-3 py-2.5 font-mono text-sm text-slate-900 outline-none transition-all duration-300 ease-in-out placeholder:text-slate-400 focus:border-primary focus:ring-4 focus:ring-primary/15 dark:border-white/12 dark:bg-slate-950/50 dark:text-slate-100 dark:focus:border-accent dark:focus:ring-accent/20"
+                  />
+                </label>
+                <label class="grid gap-2">
+                  <span class="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">Message</span>
+                  <textarea
+                    name="body"
+                    rows="6"
+                    placeholder="Briefly describe the role, requirements, and interview timeframe..."
+                    required
+                    class="w-full resize-y rounded-xl border border-slate-200/90 bg-white/80 px-3 py-2.5 font-mono text-sm text-slate-900 outline-none transition-all duration-300 ease-in-out placeholder:text-slate-400 focus:border-primary focus:ring-4 focus:ring-primary/15 dark:border-white/12 dark:bg-slate-950/50 dark:text-slate-100 dark:focus:border-accent dark:focus:ring-accent/20"
+                  ></textarea>
+                </label>
+                <button class="btn btn--primary mt-2 w-fit" type="submit">
+                  <i data-lucide="mail" class="size-4"></i>
+                  Open email
+                </button>
+                <p class="text-muted mt-2 text-sm">This form does not send data to a server; it opens your email app with your message.</p>
+              </form>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer-premium relative border-t border-slate-200/80 py-10 dark:border-white/10">
+        <div class="container-app footer__inner flex flex-wrap items-center justify-between gap-4">
+          <div class="footer__left flex flex-wrap items-center gap-x-4 gap-y-2">
+            <span class="text-muted text-sm">© <span id="year"></span> Pham Minh Tuan</span>
+            <a
+              class="text-muted text-sm font-medium text-primary hover:underline dark:text-accent"
+              href="https://github.com/TuanSOC"
+              target="_blank"
+              rel="noreferrer me"
+              >GitHub</a
+            >
+            <a
+              class="text-muted text-sm font-medium text-primary hover:underline dark:text-accent"
+              href="https://www.linkedin.com/in/tuan-pham-8abb3a335/"
+              target="_blank"
+              rel="noreferrer me"
+              >LinkedIn</a
+            >
+          </div>
+          <div class="footer__right">
+            <a class="link-pill text-sm" href="#main">
+              <i data-lucide="arrow-up" class="size-4"></i>
+              Back to top
+            </a>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>
