@@ -28,6 +28,29 @@ import {
 const THEME_KEY = "pmt_theme";
 
 const lucideIconMap = {
+  Activity,
+  ArrowRight,
+  ArrowUp,
+  Award,
+  BadgeCheck,
+  Briefcase,
+  ChevronDown,
+  Copy,
+  Cpu,
+  Download,
+  ExternalLink,
+  FolderGit2,
+  Code,
+  Globe,
+  Mail,
+  MapPin,
+  Moon,
+  Phone,
+  Send,
+  Shield,
+  Sun,
+  User,
+  // Kebab-case mappings
   activity: Activity,
   "arrow-right": ArrowRight,
   "arrow-up": ArrowUp,
@@ -52,7 +75,9 @@ const lucideIconMap = {
   user: User,
 };
 
+let _iconsInitialized = false;
 function refreshIcons() {
+  if (_iconsInitialized) return;
   createIcons({
     icons: lucideIconMap,
     attrs: {
@@ -60,6 +85,13 @@ function refreshIcons() {
       "stroke-width": 1.75,
     },
   });
+  _iconsInitialized = true;
+}
+
+/** Forced re-init for dynamic content */
+function forceRefreshIcons() {
+  _iconsInitialized = false;
+  refreshIcons();
 }
 
 function setTheme(theme, options = {}) {
@@ -683,12 +715,17 @@ function setupProjectImages() {
     if (title.includes("Oracle") || title.includes("Database")) imgSrc = "assets/project-db.png";
 
     if (title.includes("AI-based") || title.includes("Barracuda") || title.includes("Oracle")) {
+      // Prevent duplicates
+      if (card.querySelector(".project-image-preview")) return;
+
       const imgContainer = document.createElement("div");
-      imgContainer.className = "project-image-preview mb-4 overflow-hidden rounded-xl border border-white/10";
+      imgContainer.className = "project-image-preview mb-4 overflow-hidden rounded-xl border border-white/10 bg-slate-900/50";
       const img = document.createElement("img");
       img.src = imgSrc;
-      img.alt = "Project Preview";
-      img.className = "w-full aspect-video object-cover transition-transform duration-500 hover:scale-110";
+      img.alt = `${title} Preview`;
+      img.loading = "lazy";
+      img.className = "w-full aspect-video object-cover transition-transform duration-500 hover:scale-110 opacity-0 transition-opacity duration-300";
+      img.onload = () => img.classList.remove("opacity-0");
       imgContainer.appendChild(img);
       card.prepend(imgContainer);
     }
@@ -750,19 +787,30 @@ class TextScramble {
 }
 
 function wireScramble() {
-  const titles = document.querySelectorAll(".section-title");
+  const titles = document.querySelectorAll(".section-title, .hero-title");
   titles.forEach((el) => {
     const original = el.innerText;
     const fx = new TextScramble(el);
     let isScrambling = false;
 
-    el.addEventListener("mouseenter", () => {
+    const run = () => {
       if (isScrambling) return;
       isScrambling = true;
       fx.setText(original).then(() => {
         isScrambling = false;
       });
-    });
+    };
+
+    el.addEventListener("mouseenter", run);
+
+    // Also run once when it comes into view
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        run();
+        observer.unobserve(el);
+      }
+    }, { threshold: 0.5 });
+    observer.observe(el);
   });
 }
 

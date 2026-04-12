@@ -1,23 +1,23 @@
 @import "tailwindcss";
 
-@custom-variant dark (&:where(.dark, .dark *));
-
-@theme {
+:root {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 
-  --color-primary: oklch(0.54 0.24 277);
-  --color-accent: oklch(0.8 0.16 195);
-  --color-cyber-red: oklch(0.65 0.25 20);
-  --color-cyber-green: oklch(0.8 0.2 145);
+  --color-primary: #3b82f6;
+  --color-primary-rgb: 59, 130, 246;
+  --color-accent: #22d3ee;
+  --color-accent-rgb: 34, 211, 238;
+  --color-cyber-red: #f43f5e;
+  --color-cyber-green: #10b981;
 
-  --radius-card: 14px;
-  --shadow-card: 0 8px 32px -8px rgb(0 0 0 / 0.35);
-  --shadow-card-hover: 0 20px 48px -12px rgb(0 0 0 / 0.45);
+  --radius-card: 18px;
+  --shadow-card: 0 8px 32px -8px rgb(0 0 0 / 0.12);
+  --shadow-card-hover: 0 24px 64px -12px rgb(0 0 0 / 0.18);
 }
 
-@layer base {
+
   html {
     scroll-behavior: smooth;
   }
@@ -29,8 +29,16 @@
   }
 
   body {
-    @apply min-h-screen antialiased font-sans text-slate-800 bg-slate-50;
-    @apply dark:bg-slate-950 dark:text-slate-100;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: var(--font-sans);
+    color: #1e293b;
+    background-color: #f8fafc;
+  }
+  .dark body {
+    background-color: #020617;
+    color: #f1f5f9;
   }
 
   .hero-title,
@@ -48,7 +56,11 @@
   }
 
   ::selection {
-    @apply bg-primary/30 text-slate-900 dark:text-white;
+    background-color: color-mix(in oklab, var(--color-primary) 30%, transparent);
+    color: #0f172a;
+  }
+  .dark ::selection {
+    color: #ffffff;
   }
 
   :where(a, button, input, textarea, select, summary):focus-visible {
@@ -94,7 +106,7 @@
     background: linear-gradient(180deg, var(--color-primary), var(--color-accent));
     background-clip: padding-box;
   }
-}
+
 
 /* Full-page ambient (mesh + grid) */
 .page-ambient {
@@ -109,14 +121,14 @@
   position: absolute;
   border-radius: 50%;
   filter: blur(80px);
-  opacity: 0.52;
-  mix-blend-mode: multiply;
+  opacity: 0.12; /* Rất nhạt ở Light Mode */
+  mix-blend-mode: normal; /* Không dùng multiply trên nền trắng */
   will-change: transform;
 }
 
 .dark .page-ambient__blob {
   mix-blend-mode: screen;
-  opacity: 0.58;
+  opacity: 0.35;
 }
 
 .page-ambient__blob--a {
@@ -172,10 +184,10 @@
 }
 
 .dark .page-ambient__grid {
-  opacity: 0.22;
+  opacity: 0.12;
   background-image:
-    linear-gradient(to right, rgb(255 255 255 / 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgb(255 255 255 / 0.05) 1px, transparent 1px);
+    linear-gradient(to right, rgb(255 255 255 / 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(255 255 255 / 0.03) 1px, transparent 1px);
 }
 
 .page-ambient__blob--d {
@@ -201,8 +213,8 @@
 .page-ambient__flow {
   position: absolute;
   inset: -12%;
-  opacity: 0.55;
-  mix-blend-mode: multiply;
+  opacity: 0.15;
+  mix-blend-mode: normal;
   background:
     radial-gradient(
       ellipse 70% 55% at 25% 35%,
@@ -239,9 +251,9 @@
   aspect-ratio: unset;
   transform: translate(-50%, -50%);
   transform-origin: 50% 50%;
-  opacity: 0.32;
+  opacity: 0.1;
   filter: blur(88px);
-  mix-blend-mode: multiply;
+  mix-blend-mode: normal;
   background: conic-gradient(
     from 210deg at 50% 50%,
     transparent 0deg,
@@ -255,9 +267,9 @@
 }
 
 .dark .page-ambient__aurora {
-  mix-blend-mode: screen;
-  opacity: 0.28;
-  filter: blur(96px);
+  mix-blend-mode: plus-lighter;
+  opacity: 0.15;
+  filter: blur(120px);
 }
 
 .page-ambient__noise {
@@ -415,9 +427,17 @@
 }
 
 .hero-lead {
+  position: relative;
+  z-index: 10;
   text-wrap: balance;
-  font-size: clamp(1.05rem, 2.5vw, 1.125rem);
+  font-size: clamp(1.05rem, 2.5vw, 1.15rem);
   line-height: 1.72;
+  color: #334155 !important;
+}
+.dark .hero-lead {
+  color: #f1f5f9 !important;
+  font-weight: 500;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -563,44 +583,72 @@ main > section.section:nth-child(even) .container-app {
   );
 }
 
-@layer components {
+
   .topbar {
-    @apply sticky top-0 z-50 border-b backdrop-blur-xl transition-all duration-300 ease-in-out;
-    @apply border-slate-200/70 bg-white/80 dark:border-white/10 dark:bg-slate-950/75;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    border-bottom-width: 1px;
+    backdrop-filter: blur(24px);
+    transition: all 0.3s ease-in-out;
+    border-color: rgba(226, 232, 240, 0.7);
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+  .dark .topbar {
+    border-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(2, 6, 23, 0.75);
   }
 
   .topbar.topbar--scrolled {
-    @apply border-primary/15 shadow-lg shadow-slate-900/10 dark:border-accent/20 dark:shadow-black/60;
-    backdrop-filter: blur(20px) saturate(1.18);
-    box-shadow:
-      0 8px 36px -10px rgb(0 0 0 / 0.12),
-      0 1px 0 0 color-mix(in oklab, var(--color-primary) 14%, transparent);
+    border-color: color-mix(in oklab, var(--color-primary) 15%, transparent);
+    box-shadow: 0 10px 15px -3px rgba(15, 23, 42, 0.1);
+  }
+  .dark .topbar.topbar--scrolled {
+    border-color: color-mix(in oklab, var(--color-accent) 20%, transparent);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.6);
   }
 
-  .dark .topbar.topbar--scrolled {
-    box-shadow:
-      0 12px 48px -12px rgb(0 0 0 / 0.65),
-      0 1px 0 0 color-mix(in oklab, var(--color-accent) 22%, transparent);
-  }
 
   .container-app {
-    @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    max-width: 72rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  @media (min-width: 640px) {
+    .container-app { padding-left: 1.5rem; padding-right: 1.5rem; }
+  }
+  @media (min-width: 1024px) {
+    .container-app { padding-left: 2rem; padding-right: 2rem; }
   }
 
   .card {
-    @apply relative overflow-hidden rounded-2xl border p-6 shadow-lg backdrop-blur-md;
-    @apply border-slate-200/80 bg-white/85 text-slate-800 shadow-slate-200/40;
-    @apply hover:shadow-2xl hover:border-primary/30;
-    @apply dark:border-white/10 dark:bg-white/[0.06] dark:text-slate-100 dark:shadow-black/35;
-    @apply dark:hover:border-accent/45 dark:hover:shadow-[0_24px_48px_-12px_rgba(0,0,0,0.55)];
-    transition:
-      transform 0.22s ease-out,
-      box-shadow 0.32s ease,
-      border-color 0.3s ease;
+    position: relative;
+    border-radius: var(--radius-card);
+    background-color: rgba(255, 255, 255, 0.85);
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    transition: all 0.35s ease;
     --mx: 20%;
     --my: 0%;
     --tilt-x: 0deg;
     --tilt-y: 0deg;
+  }
+  .dark .card {
+    border-color: rgba(255, 255, 255, 0.15);
+    background-color: rgba(15, 23, 42, 0.75);
+    color: #ffffff;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(12px);
+  }
+  .card:hover {
+    border-color: rgba(var(--color-primary-rgb), 0.3);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  }
+  .dark .card:hover {
+    border-color: rgba(var(--color-accent-rgb), 0.45);
+    box-shadow: 0 24px 48px -12px rgba(0,0,0,0.55);
   }
 
   .card::before {
@@ -636,7 +684,11 @@ main > section.section:nth-child(even) .container-app {
 
   .card::after {
     content: "";
-    @apply pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 ease-in-out;
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
     background:
       radial-gradient(420px 180px at var(--mx) var(--my), rgb(99 102 241 / 0.12), transparent 62%),
       radial-gradient(360px 160px at calc(100% - var(--mx)) calc(20% + var(--my)), rgb(34 211 238 / 0.08), transparent 62%);
@@ -649,7 +701,7 @@ main > section.section:nth-child(even) .container-app {
   }
 
   .card:hover::after {
-    @apply opacity-100;
+    opacity: 1;
   }
 
   .card-scanline {
@@ -684,18 +736,38 @@ main > section.section:nth-child(even) .container-app {
   }
 
   .card > * {
-    @apply relative z-[1];
+    position: relative;
+    z-index: 1;
   }
 
   .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-full border px-4 py-2.5 text-sm font-semibold;
-    @apply transition-all duration-300 ease-in-out;
-    @apply active:scale-[0.98];
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 9999px;
+    border: 1px solid transparent;
+    padding: 0.625rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+  }
+  .btn:active {
+    transform: scale(0.98);
   }
 
   .btn--primary {
-    @apply relative overflow-hidden border-transparent bg-gradient-to-r from-primary via-indigo-500 to-indigo-600 text-white shadow-lg shadow-primary/25;
-    @apply bg-[length:200%_100%] hover:-translate-y-0.5 hover:shadow-xl hover:shadow-primary/40;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(to right, var(--color-primary), var(--color-indigo-500), var(--color-indigo-600));
+    background-size: 200% 100%;
+    color: white;
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -2px rgb(0 0 0 / 0.05);
+  }
+  .btn--primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1);
   }
 
   .btn--primary::after {
@@ -719,16 +791,51 @@ main > section.section:nth-child(even) .container-app {
   }
 
   .btn--ghost {
-    @apply border-slate-300/90 bg-white/60 text-slate-800 shadow-sm;
-    @apply hover:border-primary/50 hover:bg-white hover:shadow-lg hover:shadow-primary/10;
-    @apply dark:border-white/15 dark:bg-white/5 dark:text-slate-100;
-    @apply dark:hover:border-accent/50 dark:hover:bg-white/10 dark:hover:shadow-lg dark:hover:shadow-accent/10;
+    border-color: rgb(203 213 225 / 0.9);
+    background-color: rgb(255 255 255 / 0.6);
+    color: rgb(30 41 59);
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  }
+  .btn--ghost:hover {
+    border-color: color-mix(in oklab, var(--color-primary) 50%, transparent);
+    background-color: white;
+  }
+  .dark .btn--ghost {
+    border-color: rgb(255 255 255 / 0.15);
+    background-color: rgb(255 255 255 / 0.05);
+    color: rgb(241 245 249);
+  }
+  .dark .btn--ghost:hover {
+    border-color: color-mix(in oklab, var(--color-accent) 50%, transparent);
+    background-color: rgb(255 255 255 / 0.1);
   }
 
   .tag {
-    @apply relative inline-flex overflow-hidden rounded-full border border-slate-200/90 bg-slate-100/80 px-2.5 py-1 text-xs font-semibold text-slate-700;
-    @apply transition-all duration-300 ease-in-out hover:-translate-y-px hover:border-primary/30 hover:bg-primary/10;
-    @apply dark:border-white/12 dark:bg-white/5 dark:text-slate-200 dark:hover:border-accent/35 dark:hover:bg-accent/10;
+    position: relative;
+    display: inline-flex;
+    overflow: hidden;
+    border-radius: 9999px;
+    border: 1px solid rgb(226 232 240 / 0.9);
+    background-color: rgb(241 245 249 / 0.8);
+    padding: 0.25rem 0.625rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: rgb(51 65 85);
+    transition: all 0.3s ease-in-out;
+  }
+  .tag:hover {
+    transform: translateY(-1px);
+    border-color: color-mix(in oklab, var(--color-primary) 30%, transparent);
+    background-color: color-mix(in oklab, var(--color-primary) 10%, transparent);
+  }
+  .dark .tag {
+    border-color: rgb(255 255 255 / 0.12);
+    background-color: rgb(255 255 255 / 0.05);
+    color: rgb(226 232 240);
+  }
+  .dark .tag:hover {
+    border-color: color-mix(in oklab, var(--color-accent) 35%, transparent);
+    background-color: color-mix(in oklab, var(--color-accent) 10%, transparent);
   }
 
   .tag::after {
@@ -762,9 +869,33 @@ main > section.section:nth-child(even) .container-app {
   }
 
   .link-pill {
-    @apply relative inline-flex items-center gap-2 overflow-hidden rounded-full border border-slate-200/90 bg-white/70 px-3 py-2 text-sm font-semibold text-primary;
-    @apply transition-all duration-300 ease-in-out hover:translate-x-0.5 hover:border-primary/40 hover:bg-primary/10;
-    @apply dark:border-white/12 dark:bg-white/5 dark:text-accent dark:hover:border-accent/40 dark:hover:bg-accent/10;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    overflow: hidden;
+    border-radius: 9999px;
+    border: 1px solid rgb(226 232 240 / 0.9);
+    background-color: rgb(255 255 255 / 0.7);
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    transition: all 0.3s ease-in-out;
+  }
+  .link-pill:hover {
+    transform: translateX(2px);
+    border-color: color-mix(in oklab, var(--color-primary) 40%, transparent);
+    background-color: color-mix(in oklab, var(--color-primary) 10%, transparent);
+  }
+  .dark .link-pill {
+    border-color: rgb(255 255 255 / 0.12);
+    background-color: rgb(255 255 255 / 0.05);
+    color: var(--color-accent);
+  }
+  .dark .link-pill:hover {
+    border-color: color-mix(in oklab, var(--color-accent) 40%, transparent);
+    background-color: color-mix(in oklab, var(--color-accent) 10%, transparent);
   }
 
   .link-pill::after {
@@ -789,9 +920,24 @@ main > section.section:nth-child(even) .container-app {
   }
 
   .nav-link {
-    @apply relative rounded-xl px-3 py-2 text-sm font-medium text-slate-600 transition-all duration-300 ease-in-out;
-    @apply hover:bg-slate-900/5 hover:text-slate-900;
-    @apply dark:text-slate-400 dark:hover:bg-white/5 dark:hover:text-white;
+    position: relative;
+    border-radius: 0.75rem;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: rgb(71 85 105);
+    transition: all 0.3s ease-in-out;
+  }
+  .nav-link:hover {
+    background-color: rgb(15 23 42 / 0.05);
+    color: rgb(15 23 42);
+  }
+  .dark .nav-link {
+    color: rgb(148 163 184);
+  }
+  .dark .nav-link:hover {
+    background-color: rgb(255 255 255 / 0.05);
+    color: white;
   }
 
   .nav-link::after {
@@ -830,35 +976,98 @@ main > section.section:nth-child(even) .container-app {
   }
 
   .nav-link.navLink--active {
-    @apply bg-primary/15 text-primary ring-1 ring-primary/25;
-    @apply dark:bg-accent/10 dark:text-accent dark:ring-accent/30;
+    background-color: color-mix(in oklab, var(--color-primary) 15%, transparent);
+    color: var(--color-primary);
+    box-shadow: 0 0 0 1px color-mix(in oklab, var(--color-primary) 25%, transparent);
+  }
+
+  .dark .nav-link.navLink--active {
+    background-color: color-mix(in oklab, var(--color-accent) 10%, transparent);
+    color: var(--color-accent);
+    box-shadow: 0 0 0 1px color-mix(in oklab, var(--color-accent) 30%, transparent);
   }
 
   .text-muted {
-    @apply text-slate-500 dark:text-slate-400;
+    color: #64748b;
+  }
+
+  .dark .text-muted {
+    color: #94a3b8;
   }
 
   .list {
-    @apply mt-2 list-disc space-y-2 pl-5 text-slate-600 dark:text-slate-300;
+    margin-top: 0.5rem;
+    list-style-type: disc;
+    padding-left: 1.25rem;
+    color: #475569;
+  }
+  .dark .list {
+    color: #cbd5e1;
+  }
+  .list > * + * {
+    margin-top: 0.5rem;
   }
 
   .chip-hero {
-    @apply inline-flex rounded-full border border-white/15 bg-white/10 px-2.5 py-1 text-xs font-semibold text-slate-200;
-    @apply transition-all duration-300 ease-in-out hover:-translate-y-px hover:border-cyan-400/40 hover:text-white;
+    display: inline-flex;
+    border-radius: 9999px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 0.25rem 0.625rem;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    font-weight: 600;
+    color: #e2e8f0;
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms;
+  }
+  .chip-hero:hover {
+    transform: translateY(-1px);
+    border-color: rgba(34, 211, 238, 0.4);
+    color: #ffffff;
   }
 
   .timeline__when {
-    @apply mb-3 inline-flex rounded-full border border-slate-200/80 bg-amber-50 px-3 py-1 text-xs font-bold text-amber-800;
-    @apply dark:border-accent/25 dark:bg-accent/10 dark:text-accent;
+    margin-bottom: 0.75rem;
+    display: inline-flex;
+    border-radius: 9999px;
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    background-color: #fffbeb;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #92400e;
+  }
+  .dark .timeline__when {
+    border-color: color-mix(in oklab, var(--color-accent) 25%, transparent);
+    background-color: color-mix(in oklab, var(--color-accent) 10%, transparent);
+    color: var(--color-accent);
   }
 
   .signal {
-    @apply absolute -bottom-2.5 -right-2 flex h-[88px] w-[88px] items-end justify-center gap-1.5 rounded-3xl border border-white/15 bg-white/10 p-3 shadow-xl backdrop-blur-md;
-    @apply dark:border-white/12 dark:bg-slate-900/60;
+    position: absolute;
+    bottom: -0.625rem;
+    right: -0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.375rem;
+    border-radius: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 0.75rem;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(12px);
+  }
+  .dark .signal {
+    border-color: rgba(255, 255, 255, 0.12);
+    background-color: rgba(15, 23, 42, 0.6);
   }
 
   .signal__bar {
-    @apply w-2.5 rounded-full;
+    width: 0.625rem;
+    border-radius: 9999px;
     width: 10px;
     background: linear-gradient(180deg, var(--color-accent), var(--color-primary));
     box-shadow: 0 0 18px rgb(129 140 248 / 0.35);
@@ -886,7 +1095,14 @@ main > section.section:nth-child(even) .container-app {
   }
 
   .section-rule {
-    @apply mx-auto mb-6 h-0.5 w-24 rounded-full opacity-0 transition-all duration-500 ease-out;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1.5rem;
+    height: 0.125rem;
+    width: 6rem;
+    border-radius: 9999px;
+    opacity: 0;
+    transition: all 0.5s ease-out;
     background: linear-gradient(
       90deg,
       transparent,
@@ -911,7 +1127,7 @@ main > section.section:nth-child(even) .container-app {
   }
 
   .section.section--inview .section-rule {
-    @apply opacity-70;
+    opacity: 0.7;
     transform: scaleX(1);
   }
 
@@ -935,6 +1151,31 @@ main > section.section:nth-child(even) .container-app {
     );
     background-size: 200% 100%;
   }
+
+.hero-section {
+  position: relative;
+  overflow: hidden;
+  padding-top: 2.5rem;
+  padding-bottom: 4rem;
+}
+
+/* Protective background overlay: much stronger in Dark Mode */
+.hero-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.6) 0%, transparent 35%);
+  z-index: 1;
+  pointer-events: none;
+}
+.dark .hero-section::after {
+  background: linear-gradient(to right, rgba(2, 6, 23, 0.85) 0%, rgba(2, 6, 23, 0.6) 40%, transparent 100%);
+}
+@media (min-width: 768px) {
+  .hero-section {
+    padding-top: 4rem;
+    padding-bottom: 7rem;
+  }
 }
 
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
@@ -945,7 +1186,11 @@ main > section.section:nth-child(even) .container-app {
 
 /* Scroll progress */
 .scrollProgress__bar {
-  @apply relative overflow-hidden rounded-r-full shadow-[0_0_18px_rgb(129_140_248_/_0.35)];
+  position: relative;
+  overflow: hidden;
+  border-top-right-radius: 9999px;
+  border-bottom-right-radius: 9999px;
+  box-shadow: 0 0 18px rgb(129 140 248 / 0.35);
   background: linear-gradient(90deg, var(--color-primary), var(--color-accent), var(--color-primary));
   background-size: 200% 100%;
   transition: width 0.12s ease-out;
@@ -958,7 +1203,10 @@ main > section.section:nth-child(even) .container-app {
 
   .scrollProgress__bar::after {
     content: "";
-    @apply pointer-events-none absolute inset-0 w-[40%];
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    width: 40%;
     background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.4), transparent);
     animation: progress-shine 2.4s ease-in-out infinite;
   }
@@ -966,7 +1214,17 @@ main > section.section:nth-child(even) .container-app {
 
 /* Cursor ambient */
 .cursorGlow {
-  @apply pointer-events-none fixed z-0 h-[min(520px,70vw)] w-[min(520px,70vw)] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-0 mix-blend-screen blur-3xl transition-opacity duration-300;
+  pointer-events: none;
+  position: fixed;
+  z-index: 0;
+  height: clamp(300px, 70vw, 520px);
+  width: clamp(300px, 70vw, 520px);
+  transform: translate(-50%, -50%);
+  border-radius: 9999px;
+  opacity: 0;
+  mix-blend-mode: screen;
+  filter: blur(64px);
+  transition: opacity 0.3s;
   background: radial-gradient(
     circle at 30% 30%,
     color-mix(in oklab, var(--color-primary) 38%, transparent),
@@ -989,12 +1247,16 @@ main > section.section:nth-child(even) .container-app {
 }
 
 body:hover .cursorGlow {
-  @apply opacity-45 dark:opacity-60;
+  opacity: 0.45;
+}
+.dark body:hover .cursorGlow {
+  opacity: 0.6;
 }
 
 /* Reveal on scroll */
 .reveal {
-  @apply opacity-0 blur-[3px];
+  opacity: 0;
+  filter: blur(3px);
   transform: translateY(20px) scale(0.99);
   transition:
     opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
@@ -1014,7 +1276,8 @@ body:hover .cursorGlow {
 }
 
 .reveal.is-visible {
-  @apply opacity-100 blur-none;
+  opacity: 1;
+  filter: blur(0);
   transform: translateY(0) scale(1);
 }
 
@@ -1202,6 +1465,24 @@ body:hover .cursorGlow {
   opacity: 0.15;
 }
 
+.terminal {
+  white-space: pre-wrap;
+  word-break: break-all;
+  overflow-x: auto;
+}
+
+@media (max-width: 640px) {
+  .nav--mobile {
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 10px 40px -10px rgba(0,0,0,0.1);
+  }
+  .dark .nav--mobile {
+    background: rgba(15, 23, 42, 0.98);
+    box-shadow: 0 10px 40px -10px rgba(0,0,0,0.5);
+  }
+}
+
 .terminal-scanline::after {
   content: "";
   position: absolute;
@@ -1237,30 +1518,70 @@ body:hover .cursorGlow {
     animation: brand-ring 4.5s ease-in-out infinite;
   }
 
-  .hero-kicker {
-    animation: kicker-pulse 3.2s ease-in-out infinite;
-  }
-
+  /* Consolidated Hero Styles */
   .hero-title {
-    text-shadow: 0 2px 48px rgb(99 102 241 / 0.14);
+    position: relative;
+    z-index: 10;
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 8vw, 4.2rem);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+    color: #0f172a !important;
   }
 
   .dark .hero-title {
-    text-shadow:
-      0 0 48px color-mix(in oklab, var(--color-primary) 22%, transparent),
-      0 0 96px color-mix(in oklab, var(--color-accent) 12%, transparent);
+    color: #ffffff !important;
+    text-shadow: 
+      0 0 24px rgba(59, 130, 246, 0.2),
+      0 0 48px rgba(34, 211, 238, 0.1);
   }
 
-  .dark .brand-display {
-    animation: brand-name-flow 7s ease-in-out infinite;
+  .hero-gradient-text {
+    background: linear-gradient(
+      110deg,
+      var(--color-accent) 0%,
+      var(--color-primary) 30%,
+      #818cf8 60%,
+      var(--color-accent) 100%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: gradient-shimmer 6s linear infinite;
+  }
+
+  @keyframes gradient-shimmer {
+    to { background-position: 200% center; }
   }
 
   .hero-panel {
     animation: panel-aura 6s ease-in-out infinite;
   }
 
-  .dark .hero-panel {
-    animation: panel-aura-dark 6s ease-in-out infinite;
+  /* Specific fix for contact cards in hero & contact section */
+  .dark .card span.text-primary-light,
+  .dark .card p.text-slate-500,
+  .dark .card .text-xs.font-bold {
+    color: var(--color-accent) !important;
+    opacity: 1 !important;
+  }
+
+  .dark .card span.font-medium,
+  .dark .card p.font-medium,
+  .dark .card .text-sm.font-medium {
+    color: #ffffff !important;
+    opacity: 1 !important;
+  }
+
+  .dark .card span.text-slate-500,
+  .dark .card .text-slate-400 {
+    color: #cbd5e1 !important;
+  }
+
+  .dark .card i[data-lucide] {
+    color: var(--color-accent) !important;
   }
 
   .terminal--glow {
@@ -1318,7 +1639,10 @@ body:hover .cursorGlow {
 
 /* Section headings: gradient when in view */
 .section .section-title {
-  @apply text-slate-900 dark:text-white;
+  color: #0f172a;
+}
+.dark .section .section-title {
+  color: #ffffff;
 }
 
 .section.section--inview .section-title {
@@ -1366,20 +1690,21 @@ body:hover .cursorGlow {
 
 /* Project accordion */
 .project__details {
-  @apply overflow-hidden opacity-0;
-  transition:
-    max-height 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-    opacity 0.3s ease-in-out;
+  overflow: hidden;
+  opacity: 0;
+  max-height: 0;
+  transition: max-height 0.45s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s ease-in-out;
 }
 
 .project__details.is-open {
-  @apply opacity-100;
+  opacity: 1;
 }
 
 /* Timeline & certs (section stagger) */
 @media (prefers-reduced-motion: no-preference) {
   html.js #experience:not(.section--inview) .timeline__item {
-    @apply opacity-0 blur-[2px];
+    opacity: 0;
+    filter: blur(2px);
     transform: translateY(22px);
   }
 
@@ -1396,7 +1721,7 @@ body:hover .cursorGlow {
   }
 
   html.js #certs:not(.section--inview) .grid-certs > .card {
-    @apply opacity-0;
+    opacity: 0;
     transform: translateY(18px) scale(0.985);
   }
 
@@ -1431,32 +1756,59 @@ body:hover .cursorGlow {
 
 /* App shell: skeleton → content */
 #app-root {
-  @apply relative z-[1] opacity-0 invisible;
+  position: relative;
+  z-index: 1;
+  opacity: 0;
+  visibility: hidden;
   transition:
     opacity 0.45s ease-in-out,
     visibility 0.45s ease-in-out;
 }
 
 body.app-ready #app-root {
-  @apply visible opacity-100;
+  visibility: visible;
+  opacity: 1;
 }
 
 #page-skeleton {
-  @apply fixed inset-0 z-[200] flex flex-col gap-4 p-4 transition-opacity duration-500 ease-in-out sm:p-6;
-  @apply bg-slate-50 dark:bg-slate-950;
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  transition: opacity 0.5s ease-in-out;
+  background-color: #f8fafc;
+}
+@media (min-width: 640px) {
+  #page-skeleton {
+    padding: 1.5rem;
+  }
+}
+.dark #page-skeleton {
+  background-color: #020617;
 }
 
 body.app-ready #page-skeleton {
-  @apply pointer-events-none opacity-0;
+  pointer-events: none;
+  opacity: 0;
 }
 
 /* Mobile drawer */
 .nav-open #navMobile {
-  @apply visible max-h-[min(70vh,420px)] translate-y-0 opacity-100;
+  visibility: visible;
+  max-height: clamp(max-content, 70vh, 420px);
+  transform: translateY(0);
+  opacity: 1;
 }
 
 #navMobile {
-  @apply invisible max-h-0 -translate-y-2 overflow-hidden opacity-0;
+  visibility: hidden;
+  max-height: 0;
+  transform: translateY(-0.5rem);
+  overflow: hidden;
+  opacity: 0;
   transition:
     max-height 0.35s ease-in-out,
     opacity 0.3s ease-in-out,
@@ -1465,7 +1817,15 @@ body.app-ready #page-skeleton {
 }
 
 .navToggle span {
-  @apply block h-0.5 w-5 rounded-full bg-slate-700 transition-all duration-300 ease-in-out dark:bg-slate-200;
+  display: block;
+  height: 2px;
+  width: 1.25rem;
+  border-radius: 9999px;
+  background-color: #334155;
+  transition: all 0.3s ease-in-out;
+}
+.dark .navToggle span {
+  background-color: #e2e8f0;
 }
 
 .nav-open .navToggle span:first-child {
@@ -1999,7 +2359,8 @@ body.app-ready #page-skeleton {
   }
 
   .reveal {
-    @apply opacity-100 blur-none;
+    opacity: 1;
+    filter: none;
     transform: none;
     transition: none;
   }
@@ -2009,7 +2370,7 @@ body.app-ready #page-skeleton {
   }
 
   .scrollProgress__bar::after {
-    @apply hidden;
+    display: none;
   }
 
   .hero-gradient-text,
@@ -2020,7 +2381,7 @@ body.app-ready #page-skeleton {
 
   .section.section--inview .section-rule,
   .section .section-rule {
-    @apply opacity-70;
+    opacity: 0.7;
     transform: none;
     animation: none !important;
     filter: none !important;
@@ -2028,7 +2389,8 @@ body.app-ready #page-skeleton {
 
   html.js #experience .timeline__item,
   html.js #certs .grid-certs > .card {
-    @apply opacity-100 blur-none;
+    opacity: 1;
+    filter: none;
     transform: none !important;
     animation: none !important;
   }
@@ -2040,11 +2402,12 @@ body.app-ready #page-skeleton {
   }
 
   #page-skeleton {
-    @apply hidden;
+    display: none;
   }
 
   #app-root {
-    @apply visible opacity-100;
+    visibility: visible;
+    opacity: 1;
   }
 
   .project__details {
@@ -2122,7 +2485,10 @@ body.app-ready #page-skeleton {
     -webkit-background-clip: border-box;
     background-clip: border-box;
     color: inherit;
-    @apply text-slate-900 dark:text-white;
+    color: #0f172a;
+  }
+  .dark .section.section--inview .section-title {
+    color: #ffffff;
   }
 
   .section.section--inview .section-title::after {
@@ -2176,9 +2542,34 @@ body.nav-open {
 
 /* Copy-email chips + honeypot */
 .copy-chip {
-  @apply inline-flex items-center gap-1 rounded-full border border-slate-200/90 bg-white/70 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-slate-600;
-  @apply transition-colors duration-200 hover:border-primary/35 hover:bg-primary/10 hover:text-primary;
-  @apply dark:border-white/12 dark:bg-white/5 dark:text-slate-300 dark:hover:border-accent/40 dark:hover:bg-accent/10 dark:hover:text-accent;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 0.125rem 0.5rem;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  color: #475569;
+  transition: color 0.2s, background-color 0.2s, border-color 0.2s;
+}
+.copy-chip:hover {
+  border-color: color-mix(in oklab, var(--color-primary) 35%, transparent);
+  background-color: color-mix(in oklab, var(--color-primary) 10%, transparent);
+  color: var(--color-primary);
+}
+.dark .copy-chip {
+  border-color: rgba(255, 255, 255, 0.12);
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #cbd5e1;
+}
+.dark .copy-chip:hover {
+  border-color: color-mix(in oklab, var(--color-accent) 40%, transparent);
+  background-color: color-mix(in oklab, var(--color-accent) 10%, transparent);
+  color: var(--color-accent);
 }
 
 .form-honeypot {
@@ -2288,3 +2679,55 @@ body.nav-open {
     break-inside: avoid;
   }
 }
+
+
+/* --- FINAL PREMIUM ALIGNMENT & ARCHITECTURE --- */
+.dark body { background-color: #020617 !important; }
+
+/* Hero Section Refinements */
+.hero-title { color: #0f172a !important; font-weight: 800 !important; margin-bottom: 1.5rem !important; }
+.dark .hero-title { color: #ffffff !important; text-shadow: none !important; }
+
+.hero-lead { color: #475569 !important; opacity: 1 !important; }
+.dark .hero-lead { color: #94a3b8 !important; text-shadow: none !important; opacity: 1 !important; }
+
+.hero-gradient-text { 
+  background: linear-gradient(to right, #22d3ee, #3b82f6) !important; 
+  -webkit-background-clip: text !important; 
+  background-clip: text !important; 
+  color: transparent !important; 
+  font-weight: 800 !important;
+}
+
+/* Background & Ambient Cleanliness */
+.dark .hero-section::after { background: none !important; opacity: 0 !important; }
+.dark .page-ambient__blob { opacity: 0.45 !important; }
+.dark .page-ambient__aurora { opacity: 0.25 !important; }
+.dark .page-ambient__grid { opacity: 0.15 !important; }
+
+/* Card & Contact Accessibility */
+.card h3, .card h4 { color: #0f172a !important; font-weight: 700 !important; }
+.dark .card h3, .dark .card h4 { color: #ffffff !important; }
+
+.card p, .card li { color: #334155 !important; }
+.dark .card p, .dark .card li { color: #f1f5f9 !important; }
+
+.text-cyan-500, .dark .text-cyan-500 { color: #22d3ee !important; }
+
+/* Meta Tiles (Address Cards) */
+.dark .meta-tile { background-color: rgba(6, 10, 26, 0.8) !important; border-color: rgba(255, 255, 255, 0.1) !important; }
+.dark .meta-tile span.text-sm { color: #ffffff !important; opacity: 1 !important; }
+
+/* Contact Specific Overrides */
+#contact strong { color: #22d3ee !important; font-weight: 700 !important; }
+#contact li { color: #ffffff !important; }
+#contact a { color: #22d3ee !important; text-decoration: underline !important; }
+#contact .copy-chip { color: #ffffff !important; border-color: rgba(255,255,255,0.2) !important; }
+
+/* Portrait Enhancements */
+.hero-portrait-scanner { position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(to right, transparent, #22d3ee, transparent); box-shadow: 0 0 15px #22d3ee; z-index: 10; animation: portrait-scan 4s linear infinite; opacity: 0.6; }
+@keyframes portrait-scan { 0% { top: 0; } 100% { top: 100%; } }
+.hero-portrait-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(34, 211, 238, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(34, 211, 238, 0.05) 1px, transparent 1px); background-size: 20px 20px; pointer-events: none; z-index: 5; opacity: 0.3; }
+.hero-portrait-frame { transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.hero-portrait-frame:hover { transform: translateY(-5px) scale(1.02) !important; border-color: rgba(34, 211, 238, 0.4) !important; box-shadow: 0 20px 60px -10px rgba(34, 211, 238, 0.3) !important; }
+.hero-portrait-overlay { z-index: 6; }
