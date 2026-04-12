@@ -2733,10 +2733,28 @@ body.nav-open {
 /* FIX: FPT University and sub-text contrast */
 .dark .card .text-muted, 
 .dark .card .text-sm,
-.dark .text-slate-500 { 
-  color: #ffffff !important; 
+.dark .text-slate-500,
+.dark .text-slate-600,
+.dark .text-slate-400 { 
+  color: #e2e8f0 !important; 
   opacity: 1 !important;
 }
+
+/* Global dark mode: ALL muted/dim text must be readable */
+.dark .text-muted { color: #cbd5e1 !important; opacity: 1 !important; }
+.dark p, .dark li { color: #e2e8f0 !important; }
+.dark h2, .dark h3, .dark h4 { color: #f8fafc !important; }
+.dark .section-title { color: #22d3ee !important; }
+
+/* About section subtitle ("Focused on SOC/Blue Team...") */
+.dark .section__head p,
+.dark .section__head .text-muted,
+.dark .section__head .text-slate-500,
+.dark .hero-lead { 
+  color: #cbd5e1 !important; 
+  opacity: 1 !important;
+}
+
 
 /* Contact Section: Labels MUST be visible */
 .dark #contact strong { 
