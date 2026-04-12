@@ -2680,59 +2680,48 @@ body.nav-open {
   }
 }
 
+/* --- PERFECTED PREMIUM ARCHITECTURE & LOGIC --- */
+.dark body { background-color: #020617 !important; color: #f8fafc !important; }
 
-/* --- FINAL PREMIUM ALIGNMENT & ARCHITECTURE --- */
-.dark body { background-color: #020617 !important; }
-
-/* Hero Section Refinements */
-.hero-title { color: #0f172a !important; font-weight: 800 !important; margin-bottom: 1.5rem !important; }
-.dark .hero-title { color: #ffffff !important; text-shadow: none !important; }
-
-.hero-lead { color: #475569 !important; opacity: 1 !important; }
-.dark .hero-lead { color: #94a3b8 !important; text-shadow: none !important; opacity: 1 !important; }
-
-.hero-gradient-text { 
-  background: linear-gradient(to right, #22d3ee, #3b82f6) !important; 
-  -webkit-background-clip: text !important; 
-  background-clip: text !important; 
-  color: transparent !important; 
-  font-weight: 800 !important;
+/* Layering Logic: Content ALWAYS on top */
+.hero-copy, .section-content, .card, .container-app { 
+  position: relative !important; 
+  z-index: 50 !important; 
+}
+.page-ambient { 
+  z-index: 1 !important; 
+  pointer-events: none !important; 
 }
 
-/* Background & Ambient Cleanliness */
-.dark .hero-section::after { background: none !important; opacity: 0 !important; }
-.dark .page-ambient__blob { opacity: 0.45 !important; }
-.dark .page-ambient__aurora { opacity: 0.25 !important; }
-.dark .page-ambient__grid { opacity: 0.15 !important; }
+/* Visibility Master Fix */
+.hero-title { 
+  opacity: 1 !important; 
+  visibility: visible !important; 
+  color: #ffffff !important; 
+  display: block !important; 
+}
+.hero-lead { 
+  color: #cbd5e1 !important; 
+  opacity: 1 !important; 
+}
 
-/* Card & Contact Accessibility */
-.card h3, .card h4 { color: #0f172a !important; font-weight: 700 !important; }
-.dark .card h3, .dark .card h4 { color: #ffffff !important; }
-
-.card p, .card li { color: #334155 !important; }
+/* Education & Career Cards Contrast */
+.dark .card { 
+  background-color: rgba(15, 23, 42, 0.6) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+.dark .card h3, .dark .card h4 { color: #22d3ee !important; } /* Cyan titles */
 .dark .card p, .dark .card li { color: #f1f5f9 !important; }
+.dark .card .text-muted, .dark .card .text-sm { 
+  color: #ffffff !important; /* Force FPT University and sub-labels to white */
+  opacity: 1 !important;
+}
 
-.text-cyan-500, .dark .text-cyan-500 { color: #22d3ee !important; }
+/* Specific Contact Styling */
+.dark .meta-tile { background: rgba(6, 10, 26, 0.9) !important; }
+.dark .meta-tile span { color: #ffffff !important; }
 
-/* Meta Tiles (Address Cards) */
-.dark .meta-tile { background-color: rgba(6, 10, 26, 0.8) !important; border-color: rgba(255, 255, 255, 0.1) !important; }
-.dark .meta-tile span.text-sm { color: #ffffff !important; opacity: 1 !important; }
-
-/* Contact Specific Overrides */
-#contact strong { color: #22d3ee !important; font-weight: 700 !important; }
-#contact li { color: #ffffff !important; }
-#contact a { color: #22d3ee !important; text-decoration: underline !important; }
-#contact .copy-chip { color: #ffffff !important; border-color: rgba(255,255,255,0.2) !important; }
-
-/* Portrait Enhancements */
-.hero-portrait-scanner { position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(to right, transparent, #22d3ee, transparent); box-shadow: 0 0 15px #22d3ee; z-index: 10; animation: portrait-scan 4s linear infinite; opacity: 0.6; }
-@keyframes portrait-scan { 0% { top: 0; } 100% { top: 100%; } }
-.hero-portrait-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(34, 211, 238, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(34, 211, 238, 0.05) 1px, transparent 1px); background-size: 20px 20px; pointer-events: none; z-index: 5; opacity: 0.3; }
-.hero-portrait-frame { transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1); }
-.hero-portrait-frame:hover { transform: translateY(-5px) scale(1.02) !important; border-color: rgba(34, 211, 238, 0.4) !important; box-shadow: 0 20px 60px -10px rgba(34, 211, 238, 0.3) !important; }
-.hero-portrait-overlay { z-index: 6; }
-
-/* --- Emergency Visibility Fix --- */
-.hero-title, .hero-lead, .hero-kicker { opacity: 1 !important; visibility: visible !important; display: block !important; }
-.hero-gradient-text { display: inline !important; }
+/* Grid & Aura Toning */
+.dark .page-ambient__grid { opacity: 0.1 !important; }
+.dark .page-ambient__blob { opacity: 0.4 !important; }
 
