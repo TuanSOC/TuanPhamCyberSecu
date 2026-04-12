@@ -1696,6 +1696,7 @@ body:hover .cursorGlow {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  -webkit-text-fill-color: transparent;
 }
 
 .dark .section.section--inview .section-title {
@@ -2727,7 +2728,8 @@ html.dark h1 {
   color: #ffffff !important;
 }
 
-html.dark h2 {
+/* Không áp lên .section-title khi đã gradient (section--inview) — tránh “mất chữ” do !important */
+html.dark h2:not(.section-title) {
   color: #f8fafc !important;
 }
 
@@ -2812,7 +2814,7 @@ html.dark [class*="chip"] {
 }
 
 /* --- All Muted/Slate text classes (Tailwind) --- */
-html.dark [class*="text-slate"] {
+html.dark [class*="text-slate"]:not(.section-title) {
   color: #e2e8f0 !important;
   opacity: 1 !important;
 }
@@ -2917,4 +2919,36 @@ html.dark .page-ambient__nodes {
 .hero-kicker {
   opacity: 1 !important;
   visibility: visible !important;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /*
+   * Tiêu đề section (gradient + background-clip: text) phải thắng rule html.dark !important;
+   * WebKit cần -webkit-text-fill-color đồng bộ với color: transparent.
+   * (Không đặt ngoài media này — sẽ đè chế độ prefers-reduced-motion: reduce.)
+   */
+  .section.section--inview .section-title {
+    color: transparent !important;
+    -webkit-text-fill-color: transparent !important;
+  }
+
+  html.dark .section.section--inview .section-title {
+    background-image: linear-gradient(105deg,
+        rgb(248 250 252) 0%,
+        rgb(165 180 252) 28%,
+        rgb(34 211 238) 52%,
+        rgb(226 232 240) 100%) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+  }
+
+  html:not(.dark) .section.section--inview .section-title {
+    background-image: linear-gradient(105deg,
+        rgb(15 23 42) 0%,
+        rgb(67 56 202) 32%,
+        rgb(8 145 178) 58%,
+        rgb(15 23 42) 100%) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+  }
 }

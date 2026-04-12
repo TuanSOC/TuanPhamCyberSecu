@@ -787,7 +787,8 @@ class TextScramble {
 }
 
 function wireScramble() {
-  const titles = document.querySelectorAll(".section-title");
+  /* Chỉ gắn data-text-scramble khi cần: scramble dùng <span> và phá background-clip:text trên tiêu đề section */
+  const titles = document.querySelectorAll("[data-text-scramble]");
   titles.forEach((el) => {
     const original = el.innerText;
     const fx = new TextScramble(el);
