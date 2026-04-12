@@ -1668,10 +1668,6 @@ body:hover .cursorGlow {
   .dark .section.section--inview .section-rule {
     animation: rule-bar-pulse-dark 3.2s ease-in-out infinite alternate;
   }
-
-  .section.section--inview .section-title {
-    animation: section-title-flow 10s ease-in-out infinite;
-  }
 }
 
 /* Section headings: gradient when in view */
@@ -2234,18 +2230,6 @@ body.app-ready #page-skeleton {
     box-shadow:
       0 0 40px color-mix(in oklab, var(--color-accent) 48%, transparent),
       0 0 52px color-mix(in oklab, var(--color-primary) 18%, transparent);
-  }
-}
-
-@keyframes section-title-flow {
-
-  0%,
-  100% {
-    background-position: 0% 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
   }
 }
 

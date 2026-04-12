@@ -317,8 +317,9 @@ function wireCursorAmbient() {
 function wireReveal() {
   const prefersReduced = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
 
+  /* Không reveal .section__head: clip-path + filter trên cha làm chữ gradient (background-clip:text) biến mất trên nhiều engine */
   const targets = document.querySelectorAll(
-    ".hero__copy, .hero__panel, .section__head, .card:not(.timeline__item):not(.cert), .meta, .signal, .footer__inner"
+    ".hero__copy, .hero__panel, .card:not(.timeline__item):not(.cert), .meta, .signal, .footer__inner"
   );
   if (!targets.length) return;
 
