@@ -2683,11 +2683,12 @@ body.nav-open {
 /* --- PERFECTED PREMIUM ARCHITECTURE & LOGIC --- */
 .dark body { background-color: #020617 !important; color: #f8fafc !important; }
 
-/* Layering Logic: Content ALWAYS on top */
-.hero-copy, .section-content, .card, .container-app { 
-  position: relative !important; 
-  z-index: 50 !important; 
-}
+/* Z-INDEX HIERARCHY:
+   Navbar (topbar): z-index 9999 (ALWAYS on top)
+   Content cards:   z-index auto (normal flow)
+   Ambient bg:      z-index 0-1 (behind everything)
+*/
+.topbar { z-index: 9999 !important; }
 .page-ambient { 
   z-index: 1 !important; 
   pointer-events: none !important; 
@@ -2697,18 +2698,18 @@ body.nav-open {
 .hero-title { 
   opacity: 1 !important; 
   visibility: visible !important; 
-  color: #0f172a !important; /* Dark slate in Light Mode */
+  color: #0f172a !important;
   display: block !important; 
 }
 .dark .hero-title {
-  color: #ffffff !important; /* Pure white in Dark Mode */
+  color: #ffffff !important;
 }
 .hero-lead { 
-  color: #475569 !important; /* Visible slate in Light Mode */
+  color: #475569 !important;
   opacity: 1 !important; 
 }
 .dark .hero-lead {
-  color: #cbd5e1 !important; /* Visible silver in Dark Mode */
+  color: #cbd5e1 !important;
 }
 
 /* Education & Career Cards Contrast */
@@ -2735,5 +2736,6 @@ body.nav-open {
 /* Grid & Aura Toning - Reduced Noise */
 .dark .page-ambient__grid { opacity: 0.08 !important; }
 .dark .page-ambient__blob { opacity: 0.35 !important; }
-.dark .page-ambient__nodes { opacity: 0.12 !important; } /* Softened node noise */
+.dark .page-ambient__nodes { opacity: 0.12 !important; }
+
 
