@@ -392,13 +392,13 @@
 }
 
 .dark .hero-section::after {
-  background: linear-gradient(180deg, rgb(255 255 255 / 0.06) 0%, transparent 38%);
-  opacity: 1;
+  background: none;
+  opacity: 0;
 }
 
 .hero-section .container-app {
   position: relative;
-  z-index: 1;
+  z-index: 10;
 }
 
 /* Hero terminal: outer chroma halo */
@@ -1169,7 +1169,8 @@ main > section.section:nth-child(even) .container-app {
   pointer-events: none;
 }
 .dark .hero-section::after {
-  background: linear-gradient(to right, rgba(2, 6, 23, 0.85) 0%, rgba(2, 6, 23, 0.6) 40%, transparent 100%);
+  background: none;
+  opacity: 0;
 }
 @media (min-width: 768px) {
   .hero-section {
