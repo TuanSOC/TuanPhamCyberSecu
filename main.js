@@ -710,10 +710,11 @@ function setupProjectImages() {
   projects.forEach((card) => {
     const title = card.querySelector("h3")?.textContent || "";
     // Assign unique images based on project title
-    let imgSrc = "assets/dashboard.png"; // Default
-    if (title.includes("Barracuda")) imgSrc = "assets/project-waf.png";
-    if (title.includes("AI-based") || title.includes("Threat Detection")) imgSrc = "assets/project-ml.png";
-    if (title.includes("Oracle") || title.includes("Database")) imgSrc = "assets/project-db.png";
+    // Use absolute paths so it won't break on non-root URLs.
+    let imgSrc = "/assets/dashboard.png"; // Default
+    if (title.includes("Barracuda")) imgSrc = "/assets/project-waf.png";
+    if (title.includes("AI-based") || title.includes("Threat Detection")) imgSrc = "/assets/project-ml.png";
+    if (title.includes("Oracle") || title.includes("Database")) imgSrc = "/assets/project-db.png";
 
     if (title.includes("AI-based") || title.includes("Barracuda") || title.includes("Oracle")) {
       // Prevent duplicates
