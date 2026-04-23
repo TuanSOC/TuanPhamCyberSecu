@@ -5,10 +5,13 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build --emptyOutDir",
-    "preview": "vite preview"
+    "preview": "npm run build && wrangler dev",
+    "deploy": "npm run build && wrangler deploy"
   },
   "devDependencies": {
-    "vite": "^6.3.5"
+    "@cloudflare/vite-plugin": "^1.31.2",
+    "vite": "^6.3.5",
+    "wrangler": "^4.81.1"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.2.2",
