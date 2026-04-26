@@ -553,6 +553,22 @@ main>section.section:nth-child(even) .container-app {
   z-index: 1;
 }
 
+.section {
+  position: relative;
+  scroll-margin-top: 9rem;
+}
+
+.section .container-app {
+  position: relative;
+  z-index: 2;
+}
+
+.section__head {
+  position: relative;
+  z-index: 6;
+  margin-bottom: 2.75rem;
+}
+
 /* Meta tiles (hero contact chips) */
 .meta-tile {
   backdrop-filter: blur(14px);
@@ -802,7 +818,7 @@ main>section.section:nth-child(even) .container-app {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  z-index: 10;
+  z-index: 0;
   overflow: hidden;
   border-radius: inherit;
 }
@@ -830,6 +846,10 @@ main>section.section:nth-child(even) .container-app {
 .card>* {
   position: relative;
   z-index: 1;
+}
+
+.card> :not(.card-scanline) {
+  z-index: 3;
 }
 
 .recruiter-snapshot {
@@ -1104,7 +1124,7 @@ main>section.section:nth-child(even) .container-app {
 }
 
 .hero-command-panel {
-  overflow: hidden;
+  overflow: visible;
 }
 
 .hero-brief {
@@ -1247,14 +1267,29 @@ main>section.section:nth-child(even) .container-app {
 .command-center-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.04fr) minmax(320px, 0.96fr);
-  gap: 1.25rem;
+  gap: 1.5rem;
+  align-items: start;
+  margin-top: 0.5rem;
 }
 
 .command-panel {
-  overflow: hidden;
+  overflow: visible;
   background:
     linear-gradient(145deg, rgb(15 23 42 / 0.9), rgb(2 6 23 / 0.76)),
     radial-gradient(circle at 12% 0%, rgb(59 130 246 / 0.18), transparent 42%);
+}
+
+.command-panel,
+.telemetry-card,
+.alert-card,
+.workflow-step,
+.operating-model__item,
+.capability-row,
+.project-intel,
+.detection-logic,
+.hero-brief,
+.hero-threat-panel {
+  min-width: 0;
 }
 
 .command-panel--workflow,
