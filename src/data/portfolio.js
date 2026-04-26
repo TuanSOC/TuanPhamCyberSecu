@@ -57,6 +57,15 @@ export const heroMetrics = [
   { label: "Automation", value: "Python alerting + log parsing" },
 ];
 
+export const heroBrief = {
+  title: "Analyst operating brief",
+  items: [
+    { label: "Input", value: "SIEM, WAF, firewall, host logs" },
+    { label: "Decision", value: "Severity, evidence, next action" },
+    { label: "Output", value: "Clear handoff and repeatable notes" },
+  ],
+};
+
 export const recruiterHighlights = [
   {
     title: "What I bring",
@@ -127,6 +136,29 @@ export const commandCenter = {
       title: "Document",
       body: "Write a concise handoff: what happened, why it matters, evidence, and suggested next action.",
     },
+  ],
+  operatingModel: [
+    {
+      title: "Detect",
+      body: "Turn telemetry into useful signals with rules, dashboards, and anomaly review.",
+      metric: "Signal quality",
+    },
+    {
+      title: "Verify",
+      body: "Check source, timeline, affected service, rule context, and false-positive risk.",
+      metric: "Evidence depth",
+    },
+    {
+      title: "Handoff",
+      body: "Summarize impact, confidence, recommended action, and what to monitor next.",
+      metric: "SOC-ready notes",
+    },
+  ],
+  capabilityMatrix: [
+    { area: "Monitoring", level: "SIEM / logs", detail: "Wazuh, ELK, Graylog, Kibana" },
+    { area: "Network defense", level: "Firewall / WAF", detail: "pfSense, Barracuda, traffic review" },
+    { area: "Automation", level: "Python", detail: "SMTP alerts, parsing, repeatable checks" },
+    { area: "Infrastructure", level: "Homelab ops", detail: "Docker, Proxmox, Grafana, Loki" },
   ],
 };
 
@@ -235,6 +267,11 @@ export const projects = [
     environment: "DVWA + Barracuda WAF + SMTP alerting",
     outcome: "Repeatable WAF tuning and evidence collection flow",
     severity: "High",
+    detectionLogic: {
+      observe: "HTTP request pattern, WAF rule hit, source IP behavior",
+      investigate: "Validate attack type, target path, request frequency, and block evidence",
+      respond: "Tune WAF policy, forward notable events, document recommended action",
+    },
     impact: ["Blocked simulated web attacks", "Built email alerting", "Practiced on-prem WAF tuning"],
     summary:
       "Deployed DVWA behind a Barracuda Web Application Firewall and tuned WAF rules to detect and block simulated attacks.",
@@ -268,6 +305,11 @@ export const projects = [
     environment: "Wazuh + pfSense + Python ML pipeline",
     outcome: "Anomaly scoring workflow with analyst-readable context",
     severity: "Medium",
+    detectionLogic: {
+      observe: "Authentication events, HTTP features, Wazuh alerts, firewall telemetry",
+      investigate: "Compare anomaly scores with raw event context and suspicious time windows",
+      respond: "Surface likely brute-force or SQLi patterns for analyst review",
+    },
     impact: ["Detected brute-force and SQLi patterns", "Used Wazuh + pfSense telemetry", "Built anomaly scoring workflow"],
     summary:
       "Detect Brute Force and SQL Injection (SQLi) using unsupervised ML, enriched by Wazuh and pfSense telemetry.",
@@ -302,6 +344,11 @@ export const projects = [
     environment: "Oracle SQL + auditing + injection test cases",
     outcome: "Least-privilege and audit visibility improvements",
     severity: "Medium",
+    detectionLogic: {
+      observe: "User privileges, audit records, SQL injection test behavior",
+      investigate: "Review excessive access, query activity, and control gaps",
+      respond: "Apply least privilege, enable auditing, document hardening actions",
+    },
     impact: ["Enforced least privilege", "Enabled auditing", "Tested SQL injection risk"],
     summary:
       "Hardened Oracle SQL access controls and auditing to reduce risk from SQL injection and unauthorized queries.",

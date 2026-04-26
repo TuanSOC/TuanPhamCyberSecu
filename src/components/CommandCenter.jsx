@@ -78,6 +78,47 @@ export function CommandCenter() {
             ))}
           </div>
         </Card>
+
+        <Card className="command-panel command-panel--model" delay={230}>
+          <div className="command-panel__header">
+            <div>
+              <p className="command-panel__eyebrow">Operating Model</p>
+              <h3>Detection to handoff framework</h3>
+            </div>
+            <Icon name="Cpu" className="size-5 text-blue-300" />
+          </div>
+          <div className="operating-model">
+            {commandCenter.operatingModel.map((item, index) => (
+              <article className="operating-model__item" key={item.title}>
+                <span>0{index + 1}</span>
+                <div>
+                  <h4>{item.title}</h4>
+                  <p>{item.body}</p>
+                  <small>{item.metric}</small>
+                </div>
+              </article>
+            ))}
+          </div>
+        </Card>
+
+        <Card className="command-panel command-panel--matrix" delay={280}>
+          <div className="command-panel__header">
+            <div>
+              <p className="command-panel__eyebrow">Capability Matrix</p>
+              <h3>Where the lab maps to SOC work</h3>
+            </div>
+            <Icon name="Globe" className="size-5 text-blue-300" />
+          </div>
+          <div className="capability-matrix">
+            {commandCenter.capabilityMatrix.map((item) => (
+              <div className="capability-row" key={item.area}>
+                <span>{item.area}</span>
+                <strong>{item.level}</strong>
+                <small>{item.detail}</small>
+              </div>
+            ))}
+          </div>
+        </Card>
       </div>
     </Section>
   );

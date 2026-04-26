@@ -164,6 +164,26 @@ function ProjectCard({ project, index }) {
           <strong>{project.outcome}</strong>
         </div>
       </div>
+      <div className="detection-logic mb-4">
+        <div className="detection-logic__title">
+          <Icon name="Activity" className="size-4" />
+          Detection logic
+        </div>
+        <div className="detection-logic__grid">
+          <div>
+            <span>Observe</span>
+            <p>{project.detectionLogic.observe}</p>
+          </div>
+          <div>
+            <span>Investigate</span>
+            <p>{project.detectionLogic.investigate}</p>
+          </div>
+          <div>
+            <span>Respond</span>
+            <p>{project.detectionLogic.respond}</p>
+          </div>
+        </div>
+      </div>
       <div className="project-impact mb-4">
         {project.impact.map((item) => (
           <span className="impact-pill" key={item}>

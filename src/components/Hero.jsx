@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { commandCenter, heroChips, heroMetrics, heroStatus, heroTerminal, profile } from "../data/portfolio";
+import { commandCenter, heroBrief, heroChips, heroMetrics, heroStatus, heroTerminal, profile } from "../data/portfolio";
 import { useTerminalText } from "../hooks/useTerminalText";
 import { Reveal } from "./Primitives";
 import { Icon } from "./icons";
@@ -101,6 +101,20 @@ export function Hero() {
               <span className="hero-metric__value">{profile.location}</span>
             </li>
           </ul>
+          <div className="hero-brief mt-6">
+            <div className="hero-brief__title">
+              <Icon name="Cpu" className="size-4" />
+              {heroBrief.title}
+            </div>
+            <div className="hero-brief__grid">
+              {heroBrief.items.map((item) => (
+                <div className="hero-brief__item" key={item.label}>
+                  <span>{item.label}</span>
+                  <strong>{item.value}</strong>
+                </div>
+              ))}
+            </div>
+          </div>
         </Reveal>
 
         <Reveal className="hero__panel hero-panel-wrap relative" delay={120}>
