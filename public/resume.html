@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pham Minh Tuan | Resume</title>
+    <meta name="robots" content="noindex" />
+    <style>
+      :root {
+        color-scheme: dark;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: #020617;
+        color: #e2e8f0;
+      }
+
+      body {
+        margin: 0;
+        background:
+          radial-gradient(circle at top left, rgb(59 130 246 / 0.2), transparent 34rem),
+          linear-gradient(180deg, #020617, #07111f 48%, #020617);
+      }
+
+      main {
+        width: min(960px, calc(100% - 32px));
+        margin: 0 auto;
+        padding: 48px 0;
+      }
+
+      article {
+        border: 1px solid rgb(96 165 250 / 0.25);
+        border-radius: 28px;
+        background: rgb(15 23 42 / 0.78);
+        box-shadow: 0 30px 80px rgb(0 0 0 / 0.35), 0 0 60px rgb(59 130 246 / 0.12);
+        padding: clamp(24px, 4vw, 48px);
+      }
+
+      h1,
+      h2,
+      h3 {
+        margin: 0;
+        line-height: 1.15;
+      }
+
+      h1 {
+        font-size: clamp(2.1rem, 5vw, 4rem);
+        color: #f8fafc;
+      }
+
+      h2 {
+        margin-top: 2rem;
+        border-bottom: 1px solid rgb(96 165 250 / 0.25);
+        padding-bottom: 0.5rem;
+        color: #60a5fa;
+        font-size: 1rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      h3 {
+        color: #bfdbfe;
+        font-size: 1.05rem;
+      }
+
+      p,
+      li {
+        color: #cbd5e1;
+        line-height: 1.7;
+      }
+
+      a {
+        color: #7dd3fc;
+      }
+
+      .meta {
+        margin-top: 1rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        color: #93c5fd;
+        font-weight: 700;
+      }
+
+      .grid {
+        display: grid;
+        gap: 1rem;
+      }
+
+      .pill-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        padding: 0;
+        list-style: none;
+      }
+
+      .pill-list li {
+        border: 1px solid rgb(96 165 250 / 0.28);
+        border-radius: 999px;
+        background: rgb(59 130 246 / 0.12);
+        padding: 0.35rem 0.7rem;
+        color: #dbeafe;
+        font-size: 0.88rem;
+        font-weight: 700;
+      }
+
+      .entry {
+        margin-top: 1rem;
+      }
+
+      @media print {
+        body {
+          background: white;
+          color: #111827;
+        }
+
+        main {
+          width: 100%;
+          padding: 0;
+        }
+
+        article {
+          border: 0;
+          box-shadow: none;
+          background: white;
+        }
+
+        h1,
+        h3,
+        p,
+        li {
+          color: #111827;
+        }
+
+        h2,
+        a {
+          color: #1d4ed8;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <article>
+        <h1>Pham Minh Tuan</h1>
+        <p class="meta">Security Engineer Fresher • SOC/Blue Team • Ho Chi Minh City</p>
+        <p>
+          SOC/Blue Team candidate focused on SIEM monitoring, alert triage, log-driven investigation,
+          firewall/WAF configuration, and entry-level security automation.
+        </p>
+        <p>
+          Email: <a href="mailto:tinyly90891@gmail.com">tinyly90891@gmail.com</a> · Phone:
+          <a href="tel:+84981052217">0981 052 217</a> · LinkedIn:
+          <a href="https://www.linkedin.com/in/tuan-pham-8abb3a335/">tuan-pham-8abb3a335</a>
+        </p>
+
+        <h2>Core Skills</h2>
+        <ul class="pill-list">
+          <li>Wazuh</li>
+          <li>ELK</li>
+          <li>Graylog</li>
+          <li>Kibana</li>
+          <li>pfSense</li>
+          <li>Barracuda WAF</li>
+          <li>Wireshark</li>
+          <li>Nmap</li>
+          <li>Python automation</li>
+          <li>Docker</li>
+          <li>Proxmox</li>
+          <li>Grafana</li>
+        </ul>
+
+        <h2>Experience</h2>
+        <section class="entry">
+          <h3>Cosigma — Intern (System Administrator)</h3>
+          <p>Feb 2026 – Present</p>
+          <ul>
+            <li>Implemented reverse proxy and secure routing with Traefik, TLS, and DNS-based exposure.</li>
+            <li>Deployed Docker services in production-like environments and supported monitoring with Grafana, Loki, Zabbix, and Alloy.</li>
+            <li>Worked with Proxmox, secure tunneling, PAM/Teleport access control, and log pipeline troubleshooting.</li>
+          </ul>
+        </section>
+        <section class="entry">
+          <h3>South Wave Solution — Intern (SOC & Security Research)</h3>
+          <p>Sep 2024 – Dec 2024</p>
+          <ul>
+            <li>Triaged SIEM alerts and reviewed network activity using ELK, Graylog, and Kibana.</li>
+            <li>Configured Barracuda and pfSense lab firewalls and researched hardening tools such as Lynis and CIS-CAT.</li>
+            <li>Documented initial alert analysis and categorized suspicious behavior for investigation context.</li>
+          </ul>
+        </section>
+
+        <h2>Projects</h2>
+        <div class="grid">
+          <section class="entry">
+            <h3>Barracuda WAF Security Lab</h3>
+            <p>Deployed DVWA behind Barracuda WAF, simulated XSS/DDoS/upload-bypass attempts, tuned WAF policies, and built email alerting.</p>
+          </section>
+          <section class="entry">
+            <h3>AI-based Unsupervised Threat Detection</h3>
+            <p>Used Wazuh and pfSense telemetry with Isolation Forest and Autoencoder models to surface brute-force and SQLi-like anomalies.</p>
+          </section>
+          <section class="entry">
+            <h3>Oracle SQL Database Security</h3>
+            <p>Applied least privilege, auditing, and SQL injection testing to document database hardening recommendations.</p>
+          </section>
+        </div>
+      </article>
+    </main>
+  </body>
+</html>
