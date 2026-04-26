@@ -1267,16 +1267,23 @@ main>section.section:nth-child(even) .container-app {
 .command-center-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.04fr) minmax(320px, 0.96fr);
-  gap: 1.5rem;
+  gap: 2rem;
   align-items: start;
-  margin-top: 0.5rem;
+  margin-top: 1.25rem;
 }
 
 .command-panel {
   overflow: visible;
+  padding: 1.35rem;
   background:
-    linear-gradient(145deg, rgb(15 23 42 / 0.9), rgb(2 6 23 / 0.76)),
-    radial-gradient(circle at 12% 0%, rgb(59 130 246 / 0.18), transparent 42%);
+    linear-gradient(145deg, rgb(8 13 30 / 0.94), rgb(2 6 23 / 0.84)),
+    radial-gradient(circle at 12% 0%, rgb(59 130 246 / 0.14), transparent 42%);
+}
+
+.command-panel::before,
+.command-panel::after,
+.command-panel .card-scanline {
+  display: none;
 }
 
 .command-panel,
@@ -1306,7 +1313,9 @@ main>section.section:nth-child(even) .container-app {
   align-items: flex-start;
   justify-content: space-between;
   gap: 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.35rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgb(59 130 246 / 0.14);
 }
 
 .command-panel__eyebrow {
@@ -1337,7 +1346,7 @@ main>section.section:nth-child(even) .container-app {
 .telemetry-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.8rem;
+  gap: 1rem;
 }
 
 .telemetry-card,
@@ -1350,7 +1359,7 @@ main>section.section:nth-child(even) .container-app {
 
 .telemetry-card {
   border-radius: 1rem;
-  padding: 0.95rem;
+  padding: 1.05rem;
 }
 
 .telemetry-card span,
@@ -1380,13 +1389,13 @@ main>section.section:nth-child(even) .container-app {
 
 .alert-queue {
   display: grid;
-  gap: 0.75rem;
+  gap: 1rem;
 }
 
 .alert-card,
 .workflow-step {
   border-radius: 1rem;
-  padding: 0.9rem;
+  padding: 1rem;
 }
 
 .alert-card__top {
