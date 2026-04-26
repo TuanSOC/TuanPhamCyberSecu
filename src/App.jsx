@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Ambient } from "./components/Ambient";
+import { CommandCenter } from "./components/CommandCenter";
+import { CommandPalette } from "./components/CommandPalette";
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
 import { Hero } from "./components/Hero";
@@ -68,6 +70,7 @@ export default function App() {
         <Header activeId={activeId} />
         <main id="main">
           <Hero />
+          <CommandCenter />
           <About />
           <Skills />
           <LabStack />
@@ -78,6 +81,7 @@ export default function App() {
         </main>
         <Footer />
       </div>
+      <CommandPalette />
     </>
   );
 }

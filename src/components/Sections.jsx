@@ -141,10 +141,29 @@ function ProjectCard({ project, index }) {
         />
       </div>
       <div className="project__top mb-3 flex flex-wrap items-start justify-between gap-3">
-        <h3 className="text-lg font-semibold text-slate-900 dark:text-white">{project.title}</h3>
-        <div className="text-muted text-sm">{project.meta}</div>
+        <div>
+          <div className="mb-2 flex flex-wrap items-center gap-2">
+            <span className={`severity-badge severity-badge--${project.severity.toLowerCase()}`}>{project.severity}</span>
+            <span className="project-intel__meta">{project.meta}</span>
+          </div>
+          <h3 className="text-lg font-semibold text-slate-900 dark:text-white">{project.title}</h3>
+        </div>
       </div>
       <p className="text-muted mb-4 leading-relaxed">{project.summary}</p>
+      <div className="project-intel mb-4">
+        <div>
+          <span>Signal</span>
+          <strong>{project.signal}</strong>
+        </div>
+        <div>
+          <span>Environment</span>
+          <strong>{project.environment}</strong>
+        </div>
+        <div>
+          <span>Outcome</span>
+          <strong>{project.outcome}</strong>
+        </div>
+      </div>
       <div className="project-impact mb-4">
         {project.impact.map((item) => (
           <span className="impact-pill" key={item}>

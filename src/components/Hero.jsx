@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { heroChips, heroMetrics, heroTerminal, profile } from "../data/portfolio";
+import { commandCenter, heroChips, heroMetrics, heroStatus, heroTerminal, profile } from "../data/portfolio";
 import { useTerminalText } from "../hooks/useTerminalText";
 import { Reveal } from "./Primitives";
 import { Icon } from "./icons";
@@ -36,7 +36,24 @@ export function Hero() {
         <div className="h-full w-full rounded-full bg-gradient-to-tr from-indigo-500/15 to-transparent blur-3xl will-change-transform" />
       </div>
 
-      <div className="container-app relative grid gap-10 lg:grid-cols-[1fr_minmax(0,420px)] lg:items-start lg:gap-12">
+      <div className="container-app relative">
+        <div className="hero-status-strip mb-8">
+          <div className="hero-status-strip__identity">
+            <span className="hero-status-strip__pulse" aria-hidden="true" />
+            <span>Command Center / {profile.focus}</span>
+          </div>
+          <div className="hero-status-strip__items">
+            {heroStatus.map((item) => (
+              <span key={item.label}>
+                <strong>{item.label}</strong>
+                {item.value}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div className="container-app relative grid gap-10 lg:grid-cols-[1fr_minmax(0,460px)] lg:items-start lg:gap-12">
         <Reveal className="hero__copy" delay={40}>
           <p className="hero-kicker mb-4 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3 py-1.5 text-xs font-semibold text-primary dark:border-accent/25 dark:bg-accent/10 dark:text-accent">
             <Icon name="Activity" className="size-3.5" />
@@ -97,16 +114,16 @@ export function Hero() {
             </div>
           </div>
 
-          <div className="hero-float hero-panel relative z-[1] rounded-2xl border border-slate-200/80 bg-white/80 shadow-xl shadow-slate-200/40 backdrop-blur-xl dark:border-white/12 dark:bg-slate-900/50 dark:shadow-black/40">
+          <div className="hero-float hero-panel hero-command-panel relative z-[1] rounded-2xl border border-slate-200/80 bg-white/80 shadow-xl shadow-slate-200/40 backdrop-blur-xl dark:border-white/12 dark:bg-slate-900/50 dark:shadow-black/40">
             <div className="flex items-center justify-between border-b border-slate-200/80 px-4 py-3 dark:border-white/10">
               <div className="dots flex gap-2" aria-hidden="true">
                 <span className="h-2.5 w-2.5 rounded-full bg-red-400/90" />
                 <span className="h-2.5 w-2.5 rounded-full bg-amber-400/90" />
                 <span className="h-2.5 w-2.5 rounded-full bg-emerald-400/90" />
               </div>
-              <div className="font-mono text-xs font-medium text-slate-500 dark:text-slate-200">live /triage</div>
+              <div className="font-mono text-xs font-medium text-slate-500 dark:text-slate-200">analyst /triage</div>
               <span className="rounded-full border border-accent/30 bg-accent/15 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-accent">
-                blue
+                dark only
               </span>
             </div>
             <div className="relative p-4">
@@ -119,6 +136,21 @@ export function Hero() {
                   <span className="chip-hero" key={chip}>
                     {chip}
                   </span>
+                ))}
+              </div>
+              <div className="hero-threat-panel mt-4">
+                <div className="hero-threat-panel__header">
+                  <span>Threat signal queue</span>
+                  <small>simulated lab data</small>
+                </div>
+                {commandCenter.alertQueue.slice(0, 2).map((alert) => (
+                  <div className="hero-threat-row" key={alert.title}>
+                    <span className={`severity-dot severity-dot--${alert.severity.toLowerCase()}`} />
+                    <div>
+                      <strong>{alert.title}</strong>
+                      <small>{alert.source}</small>
+                    </div>
+                  </div>
                 ))}
               </div>
             </div>

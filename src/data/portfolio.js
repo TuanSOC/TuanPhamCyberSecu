@@ -19,6 +19,7 @@ export const profile = {
 };
 
 export const navItems = [
+  { id: "command-center", label: "Command", icon: "Activity" },
   { id: "about", label: "About", icon: "User" },
   { id: "skills", label: "Skills", icon: "Cpu" },
   { id: "lab-stack", label: "Lab Stack", icon: "Shield" },
@@ -43,6 +44,12 @@ $ status
 
 export const heroChips = ["SIEM", "IR", "WAF", "Firewall"];
 
+export const heroStatus = [
+  { label: "Mode", value: "SOC readiness" },
+  { label: "Signal", value: "Log-driven" },
+  { label: "Priority", value: "Triage accuracy" },
+];
+
 export const heroMetrics = [
   { label: "Security focus", value: "SOC / Blue Team" },
   { label: "Core workflow", value: "Log → triage → investigate → report" },
@@ -64,6 +71,64 @@ export const recruiterHighlights = [
     body: "Calm under alerts, documentation-first, curious about root cause, and comfortable moving between Linux, SIEM dashboards, network tools, and scripts.",
   },
 ];
+
+export const commandCenter = {
+  eyebrow: "SOC Command Center",
+  title: "Analyst workflow, not just a portfolio.",
+  intro:
+    "A recruiter-friendly view of how I think during security monitoring: collect telemetry, validate the signal, document evidence, and turn lessons into better detection.",
+  telemetry: [
+    { label: "Alert intake", value: "SIEM / WAF / Firewall", trend: "multi-source" },
+    { label: "Investigation lens", value: "Logs + context", trend: "evidence-first" },
+    { label: "Response output", value: "Notes + next action", trend: "handoff-ready" },
+    { label: "Automation layer", value: "Python scripts", trend: "repeatable" },
+  ],
+  alertQueue: [
+    {
+      severity: "High",
+      title: "Suspicious web request pattern",
+      source: "Barracuda WAF",
+      action: "Validate rule hit, source behavior, and request path",
+      status: "Triage playbook ready",
+    },
+    {
+      severity: "Medium",
+      title: "Repeated auth failures",
+      source: "Wazuh / pfSense",
+      action: "Correlate user, IP, frequency, and time window",
+      status: "Detection lab tested",
+    },
+    {
+      severity: "Low",
+      title: "Monitoring gap review",
+      source: "Grafana / Loki",
+      action: "Improve dashboard visibility and alert notes",
+      status: "Documentation-first",
+    },
+  ],
+  workflow: [
+    {
+      step: "01",
+      title: "Collect",
+      body: "Gather SIEM alerts, WAF events, firewall logs, host context, and dashboard signals.",
+    },
+    {
+      step: "02",
+      title: "Triage",
+      body: "Separate noisy events from suspicious behavior with repeatable checks and clear severity.",
+    },
+    {
+      step: "03",
+      title: "Investigate",
+      body: "Correlate source, timeline, rule triggered, affected service, and supporting evidence.",
+    },
+    {
+      step: "04",
+      title: "Document",
+      body: "Write a concise handoff: what happened, why it matters, evidence, and suggested next action.",
+    },
+  ],
+};
 
 export const aboutCards = [
   {
@@ -166,6 +231,10 @@ export const projects = [
     title: "Barracuda WAF Security Lab",
     meta: "Feb 2025 – Apr 2025 • Individual Researcher",
     image: "/assets/project-waf.png",
+    signal: "Web attack telemetry",
+    environment: "DVWA + Barracuda WAF + SMTP alerting",
+    outcome: "Repeatable WAF tuning and evidence collection flow",
+    severity: "High",
     impact: ["Blocked simulated web attacks", "Built email alerting", "Practiced on-prem WAF tuning"],
     summary:
       "Deployed DVWA behind a Barracuda Web Application Firewall and tuned WAF rules to detect and block simulated attacks.",
@@ -195,6 +264,10 @@ export const projects = [
     title: "AI-based Unsupervised Threat Detection",
     meta: "Jul 2025 – Sep 2025 • Research Developer (Capstone)",
     image: "/assets/project-ml.png",
+    signal: "Authentication and SQLi anomalies",
+    environment: "Wazuh + pfSense + Python ML pipeline",
+    outcome: "Anomaly scoring workflow with analyst-readable context",
+    severity: "Medium",
     impact: ["Detected brute-force and SQLi patterns", "Used Wazuh + pfSense telemetry", "Built anomaly scoring workflow"],
     summary:
       "Detect Brute Force and SQL Injection (SQLi) using unsupervised ML, enriched by Wazuh and pfSense telemetry.",
@@ -225,6 +298,10 @@ export const projects = [
     title: "Oracle SQL Database Security",
     meta: "Security Lab • On-Prem",
     image: "/assets/project-db.png",
+    signal: "Database access risk",
+    environment: "Oracle SQL + auditing + injection test cases",
+    outcome: "Least-privilege and audit visibility improvements",
+    severity: "Medium",
     impact: ["Enforced least privilege", "Enabled auditing", "Tested SQL injection risk"],
     summary:
       "Hardened Oracle SQL access controls and auditing to reduce risk from SQL injection and unauthorized queries.",
