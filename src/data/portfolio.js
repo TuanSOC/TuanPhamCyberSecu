@@ -23,8 +23,10 @@ export const navItems = [
   { id: "about", label: "About", icon: "User" },
   { id: "skills", label: "Skills", icon: "Cpu" },
   { id: "lab-stack", label: "Lab Stack", icon: "Shield" },
+  { id: "playbooks", label: "Playbooks", icon: "Code" },
   { id: "experience", label: "Experience", icon: "Briefcase" },
   { id: "projects", label: "Projects", icon: "FolderGit2" },
+  { id: "proof", label: "Proof", icon: "BadgeCheck" },
   { id: "certs", label: "Certifications", icon: "Award" },
   { id: "contact", label: "Contact", icon: "Mail" },
 ];
@@ -55,6 +57,48 @@ export const heroMetrics = [
   { label: "Core workflow", value: "Log → triage → investigate → report" },
   { label: "Hands-on labs", value: "WAF, SIEM, ML detection, DB hardening" },
   { label: "Automation", value: "Python alerting + log parsing" },
+];
+
+export const recruiterPromise = {
+  title: "What I can do for your SOC team",
+  body:
+    "I can support Tier 1 monitoring, first-pass alert validation, firewall/WAF evidence review, clear incident notes, and small Python scripts that make repetitive checks easier to repeat.",
+  points: ["Triage with evidence", "Document for handoff", "Tune simple detections", "Automate repetitive checks"],
+};
+
+export const quickScan = [
+  {
+    label: "Role fit",
+    title: "SOC Tier 1 / Blue Team Fresher",
+    body: "Best fit for alert triage, log review, WAF/firewall support, and monitoring workflows.",
+    href: "#contact",
+    cta: "Contact",
+    icon: "User",
+  },
+  {
+    label: "Strongest proof",
+    title: "WAF, SIEM, ML detection labs",
+    body: "Projects are framed as signal, environment, outcome, and detection logic for faster technical review.",
+    href: "#projects",
+    cta: "View projects",
+    icon: "FolderGit2",
+  },
+  {
+    label: "Artifacts",
+    title: "Case studies + triage report",
+    body: "Separate evidence pages show how findings can be documented for handoff and escalation.",
+    href: "#proof",
+    cta: "Open proof",
+    icon: "BadgeCheck",
+  },
+  {
+    label: "Workflow",
+    title: "Collect → triage → investigate → document",
+    body: "The site is organized around an analyst workflow instead of a generic portfolio layout.",
+    href: "#command-center",
+    cta: "See workflow",
+    icon: "Activity",
+  },
 ];
 
 export const heroBrief = {
@@ -230,6 +274,33 @@ export const labStack = [
   },
 ];
 
+export const socPlaybooks = [
+  {
+    title: "Brute-force login triage",
+    signal: "Repeated failed authentication or unusual source pattern",
+    steps: ["Check user, source IP, time window, and failure volume", "Compare with known admin activity and geolocation", "Escalate if successful login follows repeated failures"],
+    output: "Timeline, affected account, source context, confidence, and recommended containment step.",
+  },
+  {
+    title: "WAF web attack review",
+    signal: "XSS, SQLi, upload bypass, or high-frequency suspicious request",
+    steps: ["Review rule triggered, request path, payload pattern, and response action", "Correlate with source behavior and target application", "Tune rule or alert routing when evidence is repeatable"],
+    output: "Attack type, WAF decision, supporting request evidence, and tuning recommendation.",
+  },
+  {
+    title: "Firewall log investigation",
+    signal: "Denied traffic spike, unusual port access, or exposed service review",
+    steps: ["Check source, destination, port, direction, and rule hit", "Validate whether service exposure is expected", "Document suspicious pattern or misconfiguration risk"],
+    output: "Traffic summary, rule context, risk note, and next action for network owner.",
+  },
+  {
+    title: "Monitoring gap review",
+    signal: "Dashboard blind spot, missing alert context, or noisy rule",
+    steps: ["Identify missing field, weak threshold, or unclear alert title", "Improve dashboard panel or detection notes", "Retest with lab events and document expected behavior"],
+    output: "Before/after visibility note and repeatable detection improvement.",
+  },
+];
+
 export const experience = [
   {
     when: "Sep 2024 – Dec 2024",
@@ -263,6 +334,7 @@ export const projects = [
     title: "Barracuda WAF Security Lab",
     meta: "Feb 2025 – Apr 2025 • Individual Researcher",
     image: "/assets/project-waf.png",
+    caseStudyUrl: "/case-studies.html#barracuda",
     signal: "Web attack telemetry",
     environment: "DVWA + Barracuda WAF + SMTP alerting",
     outcome: "Repeatable WAF tuning and evidence collection flow",
@@ -301,6 +373,7 @@ export const projects = [
     title: "AI-based Unsupervised Threat Detection",
     meta: "Jul 2025 – Sep 2025 • Research Developer (Capstone)",
     image: "/assets/project-ml.png",
+    caseStudyUrl: "/case-studies.html#ai-threat-detection",
     signal: "Authentication and SQLi anomalies",
     environment: "Wazuh + pfSense + Python ML pipeline",
     outcome: "Anomaly scoring workflow with analyst-readable context",
@@ -340,6 +413,7 @@ export const projects = [
     title: "Oracle SQL Database Security",
     meta: "Security Lab • On-Prem",
     image: "/assets/project-db.png",
+    caseStudyUrl: "/case-studies.html#oracle-db-security",
     signal: "Database access risk",
     environment: "Oracle SQL + auditing + injection test cases",
     outcome: "Least-privilege and audit visibility improvements",
@@ -372,6 +446,30 @@ export const projects = [
       result: "Improved database security posture through clearer access boundaries and audit visibility.",
       learned: "Database hardening is strongest when access design, query testing, and audit review are treated together.",
     },
+  },
+];
+
+export const proofOfWork = [
+  {
+    title: "Deep case studies",
+    label: "Portfolio proof",
+    body: "Separate write-up page with problem, lab setup, detection logic, actions, result, and learning for each highlighted project.",
+    href: "/case-studies.html",
+    cta: "Open case studies",
+  },
+  {
+    title: "Incident triage report sample",
+    label: "SOC documentation",
+    body: "A sample analyst-style handoff report showing how alerts can be summarized for escalation or shift handover.",
+    href: "/incident-triage-report.html",
+    cta: "View report sample",
+  },
+  {
+    title: "AI threat detection source",
+    label: "GitHub evidence",
+    body: "Source repository for the unsupervised detection project, useful for reviewing implementation and technical direction.",
+    href: "https://github.com/TuanSOC/ProJect-AI-Unsupervised",
+    cta: "Open GitHub",
   },
 ];
 

@@ -5,7 +5,7 @@ import { CommandPalette } from "./components/CommandPalette";
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
 import { Hero } from "./components/Hero";
-import { About, Certifications, Contact, Experience, LabStack, Projects, Skills } from "./components/Sections";
+import { About, Certifications, Contact, Experience, LabStack, Playbooks, Projects, ProofOfWork, QuickScan, Skills } from "./components/Sections";
 import { navItems } from "./data/portfolio";
 import { useActiveSection } from "./hooks/useActiveSection";
 import { useCursorGlow } from "./hooks/useCursorGlow";
@@ -70,12 +70,15 @@ export default function App() {
         <Header activeId={activeId} />
         <main id="main">
           <Hero />
+          <QuickScan />
           <CommandCenter />
           <About />
           <Skills />
           <LabStack />
+          <Playbooks />
           <Experience />
           <Projects />
+          <ProofOfWork />
           <Certifications />
           <Contact onCopy={copyText} />
         </main>

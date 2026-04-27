@@ -1,7 +1,48 @@
 import { useState } from "react";
-import { aboutCards, certifications, experience, labStack, profile, projects, recruiterHighlights, skillGroups } from "../data/portfolio";
+import {
+  aboutCards,
+  certifications,
+  experience,
+  labStack,
+  profile,
+  projects,
+  proofOfWork,
+  quickScan,
+  recruiterHighlights,
+  recruiterPromise,
+  skillGroups,
+  socPlaybooks,
+} from "../data/portfolio";
 import { Card, Section, TagList } from "./Primitives";
 import { Icon } from "./icons";
+
+export function QuickScan() {
+  return (
+    <section className="quick-scan-section" aria-label="Recruiter quick scan">
+      <div className="container-app">
+        <div className="quick-scan">
+          <div className="quick-scan__intro">
+            <p className="section__eyebrow mb-1">10-second scan</p>
+            <h2>Why this portfolio is worth reviewing</h2>
+          </div>
+          <div className="quick-scan__grid">
+            {quickScan.map((item) => (
+              <a className="quick-scan-card" href={item.href} key={item.title}>
+                <div className="quick-scan-card__icon">
+                  <Icon name={item.icon} className="size-4" />
+                </div>
+                <span>{item.label}</span>
+                <strong>{item.title}</strong>
+                <p>{item.body}</p>
+                <small>{item.cta}</small>
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 export function About() {
   return (
@@ -38,6 +79,15 @@ export function About() {
             </div>
           </div>
           <div className="grid gap-4">
+            <div className="snapshot-item snapshot-item--promise">
+              <h4>{recruiterPromise.title}</h4>
+              <p>{recruiterPromise.body}</p>
+              <div className="proof-chip-row mt-3">
+                {recruiterPromise.points.map((point) => (
+                  <span className="proof-chip" key={point}>{point}</span>
+                ))}
+              </div>
+            </div>
             {recruiterHighlights.map((item) => (
               <div className="snapshot-item" key={item.title}>
                 <h4>{item.title}</h4>
@@ -46,6 +96,42 @@ export function About() {
             ))}
           </div>
         </Card>
+      </div>
+    </Section>
+  );
+}
+
+export function Playbooks() {
+  return (
+    <Section
+      id="playbooks"
+      title="SOC Playbooks"
+      eyebrow="Analyst method"
+      intro="Short, practical playbooks that show how I would move from alert signal to evidence-based handoff."
+    >
+      <div className="playbook-grid">
+        {socPlaybooks.map((playbook, index) => (
+          <Card className="playbook-card" key={playbook.title} delay={index * 70}>
+            <div className="playbook-card__top">
+              <span>PB-0{index + 1}</span>
+              <Icon name={index === 1 ? "Shield" : index === 3 ? "Cpu" : "Activity"} className="size-5 text-blue-300" />
+            </div>
+            <h3>{playbook.title}</h3>
+            <div className="playbook-signal">
+              <span>Signal</span>
+              <strong>{playbook.signal}</strong>
+            </div>
+            <ol className="playbook-steps">
+              {playbook.steps.map((step) => (
+                <li key={step}>{step}</li>
+              ))}
+            </ol>
+            <div className="playbook-output">
+              <span>Output</span>
+              <p>{playbook.output}</p>
+            </div>
+          </Card>
+        ))}
       </div>
     </Section>
   );
@@ -244,6 +330,12 @@ function ProjectCard({ project, index }) {
           </a>
         </div>
       ) : null}
+      <div className="project__links mt-3">
+        <a className="link-pill" href={project.caseStudyUrl}>
+          <Icon name="ExternalLink" className="size-4" />
+          Full case study
+        </a>
+      </div>
     </Card>
   );
 }
@@ -259,6 +351,31 @@ export function Projects() {
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {projects.map((project, index) => (
           <ProjectCard project={project} index={index} key={project.id} />
+        ))}
+      </div>
+    </Section>
+  );
+}
+
+export function ProofOfWork() {
+  return (
+    <Section
+      id="proof"
+      title="Proof of Work"
+      eyebrow="Evidence"
+      intro="A stronger portfolio should show artifacts, not only claims. These pages package the work into recruiter-friendly evidence."
+    >
+      <div className="proof-grid">
+        {proofOfWork.map((item, index) => (
+          <Card className="proof-card" key={item.title} delay={index * 80}>
+            <div className="proof-card__label">{item.label}</div>
+            <h3>{item.title}</h3>
+            <p>{item.body}</p>
+            <a className="link-pill" href={item.href} target={item.href.startsWith("http") ? "_blank" : undefined} rel={item.href.startsWith("http") ? "noreferrer" : undefined}>
+              <Icon name={item.href.startsWith("http") ? "ExternalLink" : "ArrowRight"} className="size-4" />
+              {item.cta}
+            </a>
+          </Card>
         ))}
       </div>
     </Section>
@@ -358,6 +475,14 @@ export function Contact({ onCopy }) {
             <a className="btn btn--ghost" href={profile.resume} target="_blank" rel="noreferrer">
               <Icon name="Download" className="size-4" />
               View Resume
+            </a>
+            <a className="btn btn--ghost" href="/case-studies.html">
+              <Icon name="FolderGit2" className="size-4" />
+              Case Studies
+            </a>
+            <a className="btn btn--ghost" href="/incident-triage-report.html">
+              <Icon name="BadgeCheck" className="size-4" />
+              Report Sample
             </a>
           </div>
         </Card>

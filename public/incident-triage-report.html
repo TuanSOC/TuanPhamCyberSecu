@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Incident Triage Report Sample | Pham Minh Tuan</title>
+    <meta name="description" content="Sample SOC Tier 1 incident triage report and escalation handoff by Pham Minh Tuan." />
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #020617;
+        --panel: rgba(15, 23, 42, 0.82);
+        --line: rgba(96, 165, 250, 0.24);
+        --text: #e2e8f0;
+        --muted: #94a3b8;
+        --blue: #60a5fa;
+        --cyan: #22d3ee;
+        --rose: #fb7185;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(circle at 12% 0%, rgba(59, 130, 246, 0.2), transparent 32rem),
+          radial-gradient(circle at 90% 20%, rgba(34, 211, 238, 0.12), transparent 28rem),
+          var(--bg);
+      }
+
+      main,
+      header {
+        width: min(980px, calc(100% - 32px));
+        margin: 0 auto;
+      }
+
+      header {
+        padding: 44px 0 22px;
+      }
+
+      a {
+        color: var(--cyan);
+        text-decoration: none;
+      }
+
+      .back {
+        display: inline-flex;
+        margin-bottom: 24px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 10px 14px;
+        background: rgba(15, 23, 42, 0.72);
+        font-weight: 700;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(2rem, 6vw, 4rem);
+        line-height: 0.98;
+        letter-spacing: -0.05em;
+      }
+
+      .lead {
+        max-width: 760px;
+        color: #cbd5e1;
+        line-height: 1.8;
+      }
+
+      .report {
+        display: grid;
+        gap: 16px;
+        padding-bottom: 70px;
+      }
+
+      section {
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        background:
+          linear-gradient(145deg, rgba(15, 23, 42, 0.9), rgba(2, 6, 23, 0.72)),
+          radial-gradient(circle at 0% 0%, rgba(59, 130, 246, 0.14), transparent 34%);
+        padding: clamp(20px, 4vw, 30px);
+      }
+
+      .meta {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .box {
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 16px;
+        background: rgba(2, 6, 23, 0.46);
+        padding: 14px;
+      }
+
+      .label {
+        display: block;
+        margin-bottom: 6px;
+        color: var(--blue);
+        font-size: 0.68rem;
+        font-weight: 900;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .severity {
+        color: #fecdd3;
+      }
+
+      h2 {
+        margin: 0 0 12px;
+        color: #bfdbfe;
+      }
+
+      p,
+      li {
+        color: #dbeafe;
+        line-height: 1.72;
+      }
+
+      ul,
+      ol {
+        margin: 0;
+        padding-left: 20px;
+      }
+
+      code {
+        border: 1px solid rgba(96, 165, 250, 0.2);
+        border-radius: 8px;
+        background: rgba(2, 6, 23, 0.68);
+        padding: 2px 6px;
+        color: var(--cyan);
+      }
+
+      @media print {
+        body {
+          background: #fff;
+          color: #111827;
+        }
+
+        section,
+        .box {
+          border-color: #d1d5db;
+          background: #fff;
+          box-shadow: none;
+        }
+
+        p,
+        li,
+        h1,
+        h2 {
+          color: #111827;
+        }
+      }
+
+      @media (max-width: 760px) {
+        .meta {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <a class="back" href="/">Back to portfolio</a>
+      <h1>Incident Triage Report Sample</h1>
+      <p class="lead">
+        This is a sample SOC Tier 1 handoff format. It is not live customer data. It demonstrates how I document signal, evidence, impact, confidence, and next action.
+      </p>
+    </header>
+    <main class="report">
+      <section class="meta">
+        <div class="box"><span class="label">Alert</span><strong>Repeated authentication failures</strong></div>
+        <div class="box"><span class="label">Severity</span><strong class="severity">Medium</strong></div>
+        <div class="box"><span class="label">Source</span><strong>Wazuh / pfSense lab</strong></div>
+        <div class="box"><span class="label">Status</span><strong>Escalation-ready</strong></div>
+      </section>
+
+      <section>
+        <h2>Executive Summary</h2>
+        <p>
+          Multiple failed login attempts were observed against a monitored service from a single external source within a short time window. No confirmed successful login was identified in the sample evidence. Recommend blocking or monitoring the source IP and reviewing account exposure if the pattern repeats.
+        </p>
+      </section>
+
+      <section>
+        <h2>Observed Evidence</h2>
+        <ul>
+          <li>Repeated authentication failures for the same account family within a concentrated time window.</li>
+          <li>Source IP generated multiple attempts against the same service endpoint.</li>
+          <li>Firewall telemetry showed repeated connection attempts around the alert window.</li>
+          <li>No immediate successful authentication event was confirmed in the reviewed sample.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Analyst Checks</h2>
+        <ol>
+          <li>Validate affected user/service and identify whether the account is expected to be exposed.</li>
+          <li>Correlate SIEM alert with firewall logs, source IP, destination port, and time window.</li>
+          <li>Search for successful authentication after repeated failures.</li>
+          <li>Document confidence, false-positive possibility, and recommended containment.</li>
+        </ol>
+      </section>
+
+      <section>
+        <h2>Recommended Next Actions</h2>
+        <ul>
+          <li>Temporarily block or rate-limit the suspicious source if attempts continue.</li>
+          <li>Review account lockout policy and MFA status for exposed services.</li>
+          <li>Add dashboard note or detection comment: <code>failed_auth_count + source_ip + time_window</code>.</li>
+          <li>Escalate if a successful login appears after the failed attempts.</li>
+        </ul>
+      </section>
+    </main>
+  </body>
+</html>
